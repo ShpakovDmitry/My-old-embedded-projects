@@ -1,0 +1,5 @@
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
