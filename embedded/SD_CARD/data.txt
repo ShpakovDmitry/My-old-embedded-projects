@@ -1,0 +1,318 @@
+sd_card_init: initialization succes
+0xffff
+Read.I'm here1
+read_block: CMD17 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+0xffff
+Read.I'm here1
+read_block: CMD17 fail
+sd_card_init: initialization succes
+0xffff
+Read.I'm here1
+read_block: CMD17 fail
+sd_card_init: initialization succes
+0xffff
+ÿRead.I'm here1
+read_block: CMD17 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+sd_card_init: initialization succes
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+sd_card_init: initialization succes
+sd_card_init: initialization succes
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+read_block: data block read succes:
+01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901sd_card_init: initialization succes
+sd_card_init: initialization succes
+read_block: data block read succes:
+01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901sd_card_init: initialization succes
+read_block: data block read succes:
+012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789010xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+read_block: data block read succes:
+01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901sd_card_init: initialization succes
+sd_card_init: initialization succes
+sd_card_init: initialization succes
+sd_card_init: initialization succes
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: CMD0 fail
+sd_card_init: CMD0 fail
+sd_card_init: CMD0 fail
+sd_card_init: CMD0 fail
+sd_card_init: CMD0 fail
+sd_card_init: CMD0 fail
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+read_block: CMD24 fail
+read_block: CMD17 fail
+sd_card_init: initialization succes
+read_block: CMD24 fail
+read_block: CMD17 fail
+sd_card_init: initialization succes
+read_block: CMD24 fail
+read_block: CMD17 fail
+sd_card_init: initialization succes
+read_block: CMD24 fail
+read_block: CMD17 fail
+sd_card_init: initialization succes
+read_block: CMD24 fail
+read_block: CMD17 fail
+sd_card_init: initialization succes
+read_block: CMD24 fail
+read_block: CMD17 fail
+sd_card_init: initialization succes
+read_block: CMD24 fail
+read_block: CMD17 fail
+sd_card_init: initialization succes
+read_block: CMD24 fail
+read_block: CMD17 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: initialization succes
+ÿRead.I'm here2
+read_block: CMD17 fail
+0xffff
+sd_card_init: CMD0 fail
+sd_card_init: CMD1 fail
+0xffff
+sd_card_init: CMD0 fail
+Init.Here
+sd_card_init: CMD1 fail
+0xffff
+sd_card_init: CMD0 fail
+Init.Here
+sd_card_init: CMD1 fail
+Init.Here
+sd_card_init: CMD1 fail
+Init.Here
+sd_card_init: CMD1 fail
+Init.Here
+sd_card_init: CMD1 fail
+Init.Here
+sd_card_init: CMD1 fail
+0xffff
+sd_card_init: CMD0 fail
