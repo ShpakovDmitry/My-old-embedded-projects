@@ -10,3 +10,10 @@ I succed to implement routines to communicate with memory card usind SD card sta
 but communication was very unstable.
 
 Project and thus library is not finished.
+
+# *comport.c*
+ Is source file for PC side handling communication with uC using terminal. Log example is in file *data.txt*
+# *sd_card.h*
+ Is supposed to be library for memory card comunnications
+# *testcard.c*
+ Source file for communication test and debug purposes at uC side.
