@@ -9,14 +9,6 @@ void spi_init(void);
 unsigned char spi_transaction(char c);
 
 
-int main(void)
-{
-	
-	
-	return 0;
-}
-
-
 void spi_init(void)
 {
 	// настраиваем выводы MOSI, SCK, SS на выход
