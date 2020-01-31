@@ -10,3 +10,15 @@ Second source "radio_morse_panel.c" is for device that plays preset Morse Code w
 with buttons.
 
 Both projects utilizes AVR ATtiny2313 uC.
+
+
+To build project following tools should be installed:
+```
+avr-gcc, avr-binutils, avr-libc
+```
+To get them run following commands
+###On Linux
+```
+$ apt-get update
+$ apt-get install avr-gcc avr-binutils avr-libc
+```
