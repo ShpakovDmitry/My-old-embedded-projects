@@ -14,11 +14,21 @@ Both projects utilizes AVR ATtiny2313 uC.
 
 To build project following tools should be installed:
 ```
-avr-gcc, avr-binutils, avr-libc
+avr-gcc, avr-binutils, avr-libc, make
 ```
 To get them run following commands
-###On Linux
+### On Linux
 ```
 $ apt-get update
 $ apt-get install avr-gcc avr-binutils avr-libc
+```
+After packages are installed run following command:
+```
+$ ./make
+```
+
+To remove build files created by *make* specify the *clean*
+target for *make* :
+```
+$ make clean
 ```
