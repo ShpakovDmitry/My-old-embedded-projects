@@ -1,8 +1,17 @@
-med_panel.hex: med_panel.c med_panel.o
-	avr-gcc -mmcu=attiny2313 -DF_CPU=16000000UL -Os -o med_panel.o med_panel.c && \
-	avr-objcopy -O ihex med_panel.o med_panel.hex
-radio_morse_panel.hex: radio_morse_panel.c radio_morse_panel.o
-	avr-gcc -mmcu=attiny2313 -DF_CPU=16000000UL -Os -o radio_morse_panel.o radio_morse_panel.c && \
-	avr-objcopy -O ihex radio_morse_panel.o radio_morse_panel.hex
+CC = avr-gcc
+CCFLAGS += -mmcu=attiny2313 -DF_CPU=16000000UL -Os 
+BUILD_DIR = build
+
+all: $(BUILD_DIR) $(BUILD_DIR)/med_panel.hex $(BUILD_DIR)/radio_morse_panel.hex
+
+$(BUILD_DIR):
+	mkdir --parents $(BUILD_DIR)
+
+$(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.o
+	avr-objcopy -O ihex $< $@
+	
+$(BUILD_DIR)/%.o: %.c
+	$(CC) $(CCFLAGS) -o $@ $<
+	
 clean:
-	rm -rf *.hex *.o
+	rm -rf $(BUILD_DIR)
