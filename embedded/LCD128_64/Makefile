@@ -1,5 +1,9 @@
+MMCU = atmega16
+F_CPU = 12000000UL
+OPTIMISATION = -Os
+
 CC = avr-gcc
-CCFLAGS += -mmcu=atmega16 -DF_CPU=12000000UL -Os 
+CCFLAGS += -mmcu=$(MMCU) -DF_CPU=$(F_CPU) $(OPTIMISATION)
 BUILD_DIR = build
 
 all: $(BUILD_DIR) $(BUILD_DIR)/LCD.hex
