@@ -1,5 +1,9 @@
+MMCU = attiny2313
+F_CPU = 16000000UL
+OPTIMISATION = -Os
+
 CC = avr-gcc
-CCFLAGS += -mmcu=attiny2313 -DF_CPU=16000000UL -Os 
+CCFLAGS += -mmcu=$(MMCU) -DF_CPU=$(F_CPU) $(OPTIMISATION) 
 BUILD_DIR = build
 
 all: $(BUILD_DIR) $(BUILD_DIR)/med_panel.hex $(BUILD_DIR)/radio_morse_panel.hex
