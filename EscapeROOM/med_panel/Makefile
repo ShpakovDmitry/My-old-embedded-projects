@@ -1,13 +1,13 @@
 MMCU = attiny2313
 F_CPU = 16000000UL
 OPTIMISATION = -Os
-TARGET = med_panel.hex
+TARGET = med_panel
 
 CC = avr-gcc
 CCFLAGS += -mmcu=$(MMCU) -DF_CPU=$(F_CPU) $(OPTIMISATION) 
 BUILD_DIR = build
 
-all: $(BUILD_DIR) $(BUILD_DIR)/$(TARGET)
+all: $(BUILD_DIR) $(BUILD_DIR)/$(TARGET).hex
 
 $(BUILD_DIR):
 	mkdir --parents $(BUILD_DIR)
