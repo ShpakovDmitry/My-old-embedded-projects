@@ -1,21 +1,21 @@
-MMCU = attiny2313
-F_CPU = 16000000UL
-OPTIMISATION = -Os
+_1_SUB_PROJ_DIR = med_panel
+_2_SUB_PROJ_DIR = radio_morse_panel
+_1_SUB_PROJ_BUILD_DIR = build
+_2_SUB_PROJ_BUILD_DIR = build
+TARGET_BUILD_FILE = hex
+TOP_BUILD_DIR = build
 
-CC = avr-gcc
-CCFLAGS += -mmcu=$(MMCU) -DF_CPU=$(F_CPU) $(OPTIMISATION) 
-BUILD_DIR = build
 
-all: $(BUILD_DIR) $(BUILD_DIR)/med_panel.hex $(BUILD_DIR)/radio_morse_panel.hex
 
-$(BUILD_DIR):
-	mkdir --parents $(BUILD_DIR)
-
-$(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.o
-	avr-objcopy -O ihex $< $@
-	
-$(BUILD_DIR)/%.o: %.c
-	$(CC) $(CCFLAGS) -o $@ $<
+all:
+	make -C $(_1_SUB_PROJ_DIR) all
+	make -C $(_2_SUB_PROJ_DIR) all
+	mkdir --parents $(TOP_BUILD_DIR)
+	cp $(_1_SUB_PROJ_DIR)/$(_1_SUB_PROJ_BUILD_DIR)/*.$(TARGET_BUILD_FILE) $(TOP_BUILD_DIR)
+	cp $(_2_SUB_PROJ_DIR)/$(_2_SUB_PROJ_BUILD_DIR)/*.$(TARGET_BUILD_FILE) $(TOP_BUILD_DIR)
 	
 clean:
-	rm -rf $(BUILD_DIR)
+	
+	make -C $(_1_SUB_PROJ_DIR) clean
+	make -C $(_2_SUB_PROJ_DIR) clean
+	rm -rf $(TOP_BUILD_DIR)
