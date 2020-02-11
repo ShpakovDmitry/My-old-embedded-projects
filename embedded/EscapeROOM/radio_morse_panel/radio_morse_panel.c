@@ -2,20 +2,20 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-#define on	(1 << PD5)
-#define off	(0 << PD5)
-#define dot_length 150
-#define repeat_max 5
+#define CARRIER_ON	(1 << PD5)
+#define CARRIER_OFF	(0 << PD5)
+#define DOT_DURATION 150
+#define MAX_REPEAT 5
 #define RED_LED PD3
 #define GREEN_LED PD4
 
-unsigned char carrier = off;
+unsigned char carrier = CARRIER_OFF;
 
 void unit()
 {
 	unsigned char i;
 	
-	for(i = 0; i < dot_length; i++)
+	for(i = 0; i < DOT_DURATION; i++)
 	{
 		PORTD ^= ((1 << PD5) & carrier);
 		_delay_ms(1);
@@ -24,16 +24,16 @@ void unit()
 
 void dot()
 {
-	carrier = on;
+	carrier = CARRIER_ON;
 	unit();
-	carrier = off;
+	carrier = CARRIER_OFF;
 }
 
 void dash()
 {
-	carrier = on;
+	carrier = CARRIER_ON;
 	unit(); unit(); unit();
-	carrier = off;
+	carrier = CARRIER_OFF;
 }
 
 void short_space()
@@ -244,7 +244,7 @@ ISR(PCINT_vect)
 	
 	if(play_flag)
 	{
-		play_flag = repeat_max;
+		play_flag = MAX_REPEAT;
 		for(;play_flag > 0; play_flag--)
 		{
 			phrase();
