@@ -5,7 +5,7 @@
 #define CARRIER_ON	(1 << PD5)
 #define CARRIER_OFF	(0 << PD5)
 #define DOT_DURATION 150
-#define repeat_max 5
+#define MAX_REPEAT 5
 #define RED_LED PD3
 #define GREEN_LED PD4
 
@@ -244,7 +244,7 @@ ISR(PCINT_vect)
 	
 	if(play_flag)
 	{
-		play_flag = repeat_max;
+		play_flag = MAX_REPEAT;
 		for(;play_flag > 0; play_flag--)
 		{
 			phrase();
