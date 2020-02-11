@@ -2,14 +2,14 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-#define on	(1 << PD5)
-#define off	(0 << PD5)
+#define CARRIER_ON	(1 << PD5)
+#define CARRIER_OFF	(0 << PD5)
 #define dot_length 150
 #define repeat_max 5
 #define RED_LED PD3
 #define GREEN_LED PD4
 
-unsigned char carrier = off;
+unsigned char carrier = CARRIER_OFF;
 
 void unit()
 {
@@ -24,16 +24,16 @@ void unit()
 
 void dot()
 {
-	carrier = on;
+	carrier = CARRIER_ON;
 	unit();
-	carrier = off;
+	carrier = CARRIER_OFF;
 }
 
 void dash()
 {
-	carrier = on;
+	carrier = CARRIER_ON;
 	unit(); unit(); unit();
-	carrier = off;
+	carrier = CARRIER_OFF;
 }
 
 void short_space()
