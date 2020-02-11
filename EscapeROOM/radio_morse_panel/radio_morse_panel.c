@@ -4,7 +4,7 @@
 
 #define CARRIER_ON	(1 << PD5)
 #define CARRIER_OFF	(0 << PD5)
-#define dot_length 150
+#define DOT_DURATION 150
 #define repeat_max 5
 #define RED_LED PD3
 #define GREEN_LED PD4
@@ -15,7 +15,7 @@ void unit()
 {
 	unsigned char i;
 	
-	for(i = 0; i < dot_length; i++)
+	for(i = 0; i < DOT_DURATION; i++)
 	{
 		PORTD ^= ((1 << PD5) & carrier);
 		_delay_ms(1);
