@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:radio_morse_panel-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
@@ -692,7 +693,7 @@ L Device:C C6
 U 1 1 5E461033
 P 6500 3700
 F 0 "C6" H 6615 3746 50  0000 L CNN
-F 1 "0.1uF" H 6615 3655 50  0000 L CNN
+F 1 "DNP" H 6615 3655 50  0000 L CNN
 F 2 "" H 6538 3550 50  0001 C CNN
 F 3 "~" H 6500 3700 50  0001 C CNN
 	1    6500 3700
@@ -766,7 +767,7 @@ L Device:C C7
 U 1 1 5E46FC8B
 P 8200 3700
 F 0 "C7" H 8315 3746 50  0000 L CNN
-F 1 "0.1uF" H 8315 3655 50  0000 L CNN
+F 1 "DNP" H 8315 3655 50  0000 L CNN
 F 2 "" H 8238 3550 50  0001 C CNN
 F 3 "~" H 8200 3700 50  0001 C CNN
 	1    8200 3700
@@ -836,7 +837,7 @@ L Device:C C8
 U 1 1 5E471505
 P 9900 3700
 F 0 "C8" H 10015 3746 50  0000 L CNN
-F 1 "0.1uF" H 10015 3655 50  0000 L CNN
+F 1 "DNP" H 10015 3655 50  0000 L CNN
 F 2 "" H 9938 3550 50  0001 C CNN
 F 3 "~" H 9900 3700 50  0001 C CNN
 	1    9900 3700
@@ -868,11 +869,11 @@ Wire Wire Line
 Connection ~ 9900 3400
 Wire Wire Line
 	9900 3400 9500 3400
-Text Label 5350 5200 0    50   ~ 0
+Text Label 5150 5800 0    50   ~ 0
 BUTTON_1
-Text Label 5350 5400 0    50   ~ 0
+Text Label 5150 5600 0    50   ~ 0
 BUTTON_3
-Text Label 5350 5300 0    50   ~ 0
+Text Label 5150 5300 0    50   ~ 0
 BUTTON_2
 Text Label 6450 3400 2    50   ~ 0
 BUTTON_1
@@ -939,11 +940,11 @@ Text Label 8050 5300 0    50   ~ 0
 MOSI
 Text Label 8050 5200 0    50   ~ 0
 MISO
-Text Label 5350 5900 0    50   ~ 0
+Text Label 5600 5900 0    50   ~ 0
 SCK
-Text Label 5350 5800 0    50   ~ 0
+Text Label 5600 5800 0    50   ~ 0
 MISO
-Text Label 5350 5700 0    50   ~ 0
+Text Label 5600 5700 0    50   ~ 0
 MOSI
 Text Notes 7650 4850 0    100  ~ 0
 ISP connector
@@ -957,12 +958,6 @@ Wire Notes Line
 	11050 5600 11050 4800
 Wire Notes Line
 	11050 4800 9000 4800
-Wire Wire Line
-	5050 5200 5800 5200
-Wire Wire Line
-	5050 5300 5800 5300
-Wire Wire Line
-	5050 5400 5800 5400
 Wire Wire Line
 	5050 5700 5800 5700
 Wire Wire Line
@@ -1000,4 +995,15 @@ Wire Wire Line
 	3800 4450 3650 4450
 Wire Wire Line
 	3650 4450 3650 4650
+Wire Wire Line
+	5050 5300 5800 5300
+Wire Wire Line
+	5050 5600 5800 5600
+NoConn ~ 5050 5200
+NoConn ~ 5050 5400
+NoConn ~ 5050 5500
+NoConn ~ 5050 6100
+NoConn ~ 5050 6200
+NoConn ~ 5050 6300
+NoConn ~ 5050 6700
 $EndSCHEMATC
