@@ -162,10 +162,6 @@ unsigned char button1 = ~(1 << PB6);
 unsigned char button2 = ~(1 << PB1);
 unsigned char button3 = ~(1 << PB4);
 
-//unsigned char button1 = ~(1 << PB5);
-//unsigned char button2 = ~(1 << PB3);
-//unsigned char button3 = ~(1 << PB1);
-
 ISR(PCINT_vect)
 {
 	static unsigned char i = 0;
