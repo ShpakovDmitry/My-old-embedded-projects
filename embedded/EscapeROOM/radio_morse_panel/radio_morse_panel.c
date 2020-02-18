@@ -8,10 +8,36 @@
 #define MAX_REPEAT 5
 #define RED_LED PD3
 #define GREEN_LED PD4
+#define MAX_MORSE_PARTS 5	// according to ITU maximal parts in one letter is five ex. '2' = "..---"
+
+// simply change the phrase to needed one, length is limited by flash memory size
+const char MorsePhraseToPlay[] = "472";
+
+typedef struct{
+	char Symbol;
+	char Code[MAX_MORSE_PARTS];
+}MorseCode;
+
+// Morse alphabet set; could be added another alphabet codes
+const MorseCode morseCode[] = { 
+	{'0', "-----"},
+	{'1', ".----"},
+	{'2', "..---"},
+	{'3', "...--"},
+	{'4', "....-"},
+	{'5', "....."},
+	{'6', "-...."},
+	{'7', "--..."},
+	{'8', "---.."},
+	{'9', "----."}
+};
+
+// get number of elements in our morse alphabet set
+const unsigned char NumOfMorseCodeElements = sizeof(morseCode) / sizeof(morseCode[0]);
 
 unsigned char carrier = CARRIER_OFF;
 
-void unit()
+void PlayUnit()
 {
 	unsigned char i;
 	
@@ -22,138 +48,83 @@ void unit()
 	}
 }
 
-void dot()
+void PlayDot()
 {
 	carrier = CARRIER_ON;
-	unit();
+	PlayUnit();
 	carrier = CARRIER_OFF;
 }
 
-void dash()
+void PlayDash()
 {
 	carrier = CARRIER_ON;
-	unit(); unit(); unit();
+	PlayUnit(); PlayUnit(); PlayUnit();
 	carrier = CARRIER_OFF;
 }
 
-void short_space()
+void PlayShortSpace()
 {
-	unit();
+	PlayUnit();
 }
 
-void letter_space()
+void PlayLetterSpace()
 {
-	unit(); unit(); unit();
+	PlayUnit(); PlayUnit(); PlayUnit();
 }
 
-void word_space()
+void PlayWordSpace()
 {
-	unit(); unit(); unit(); unit(); unit(); unit(); unit();
+	PlayUnit(); PlayUnit(); PlayUnit(); PlayUnit(); PlayUnit(); PlayUnit(); PlayUnit();
 }
 
-void zero()
-{
-	dash(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dash();
+unsigned char GetLetterPositionInMorseAlphabet(char Letter, const MorseCode *MorseAlphabet, const unsigned char NumOfElements){
+	unsigned char LetterPosition;
+	
+	// simply compare each element in alphabet;
+	for(LetterPosition = 0; LetterPosition < NumOfElements; LetterPosition++){
+		if( (MorseAlphabet + LetterPosition)->Symbol == Letter)
+			break;
+	}
+	
+	return LetterPosition;
 }
 
-
-void one()
-{
-	dot();  short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dash();
+void PlayMorseLetter(char Letter, const MorseCode *MorseAlphabet, const unsigned char NumOfElements){
+	unsigned char LetterPositionInAlphabet;
+	unsigned char i;
+	
+	LetterPositionInAlphabet = GetLetterPositionInMorseAlphabet(Letter, MorseAlphabet, NumOfElements);
+	
+	// play each morse letter code element 
+	for(i = 0; i < MAX_MORSE_PARTS && (MorseAlphabet + LetterPositionInAlphabet)->Code[i] != '\0'; i++){
+		switch( (MorseAlphabet + LetterPositionInAlphabet)->Code[i] ){
+			case '.' :
+				PlayDot();
+				break;
+			case '-' :
+				PlayDash();
+				break;
+		}
+		PlayShortSpace();
+	}
+	
+	return;
 }
 
-
-void two()
-{
-	dot(); short_space();
-	dot(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dash();
+void PlayMorsePhrase(const char *MorsePhraseToPlay, const MorseCode *MorseAlphabet, const unsigned char NumOfElements){
+		unsigned char i;
+		
+		// play each letter until 'MorsePhraseToPlay' end is not reached
+		for(i = 0; MorsePhraseToPlay[i] != '\0'; i++){
+			PlayMorseLetter(MorsePhraseToPlay[i], MorseAlphabet, NumOfElements);
+			PlayLetterSpace();
+		}
+		
+		PlayWordSpace();
+		
+		return;
 }
 
-
-void three()
-{
-	dot(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dash(); short_space();
-	dash();
-}
-
-
-void four()
-{
-	dot(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dash();
-}
-
-
-void five()
-{
-	dot(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dot();
-}
-
-void six()
-{
-	dash(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dot();
-}
-
-void seven()
-{
-	dash(); short_space();
-	dash(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dot();
-}
-
-void eight()
-{
-	dash(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dot(); short_space();
-	dot();
-}
-
-void nine()
-{
-	dash(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dot();
-}
-
-
-void phrase()
-{
-	four(); letter_space();
-	seven(); letter_space();
-	two();
-	word_space();
-}
 
 unsigned char play_flag = 0;
 unsigned char button = 0;
@@ -243,7 +214,8 @@ ISR(PCINT_vect)
 		play_flag = MAX_REPEAT;
 		for(;play_flag > 0; play_flag--)
 		{
-			phrase();
+			PlayMorsePhrase(MorsePhraseToPlay, morseCode, NumOfMorseCodeElements);
+			
 		}
 	}
 }
