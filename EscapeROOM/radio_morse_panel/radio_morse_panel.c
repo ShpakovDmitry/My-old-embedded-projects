@@ -85,7 +85,6 @@ void playMorseLetter(char letter, const MorseCode* morseAlphabet, const unsigned
 	
 	letterPositionInAlphabet = getLetterPositionInMorseAlphabet(letter, morseAlphabet, numOfElements);
 	
-	// play each morse letter code element 
 	for(i = 0; i < MAX_MORSE_PARTS && (morseAlphabet + letterPositionInAlphabet)->code[i] != '\0'; i++){
 		switch( (morseAlphabet + letterPositionInAlphabet)->code[i] ){
 			case '.' :
