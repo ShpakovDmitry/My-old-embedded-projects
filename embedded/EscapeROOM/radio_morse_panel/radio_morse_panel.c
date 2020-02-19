@@ -30,7 +30,6 @@ static const MorseCode morseCode[] = {
 	{ 0, NULL}
 };
 
-const unsigned char numOfMorseCodeElements = sizeof(morseCode) / sizeof(morseCode[0]);
 
 unsigned char carrier = CARRIER_OFF;
 
@@ -181,7 +180,7 @@ ISR(PCINT_vect){
 	if(playFlag){
 		playFlag = MAX_REPEAT;
 		for(;playFlag > 0; playFlag--){
-			playMorsePhrase(morsePhraseToPlay, morseCode, numOfMorseCodeElements);
+			playMorsePhrase(morsePhraseToPlay, morseCode);
 			
 		}
 	}
