@@ -69,9 +69,9 @@ void playWordSpace(){
 }
 
 char* findMorseChar(char letter, const MorseCode* morseAlphabet){
-	for(unsigned char i = 0; morseAlphabet[i]->symbol != 0; i++){
-		if( morseAlphabet[i]->symbol == letter)
-			return morseAlphabet[i]->code;
+	for(unsigned char i = 0; morseAlphabet[i].symbol != 0; i++){
+		if( morseAlphabet[i].symbol == letter)
+			return morseAlphabet[i].code;
 	}
 	
 	return NULL;
