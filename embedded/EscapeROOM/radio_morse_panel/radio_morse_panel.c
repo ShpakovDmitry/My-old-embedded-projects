@@ -34,8 +34,7 @@ const unsigned char numOfMorseCodeElements = sizeof(morseCode) / sizeof(morseCod
 
 unsigned char carrier = CARRIER_OFF;
 
-void playUnit()
-{
+void playUnit(){
 	unsigned char i;
 	
 	for(i = 0; i < DOT_DURATION; i++)
@@ -45,32 +44,27 @@ void playUnit()
 	}
 }
 
-void playDot()
-{
+void playDot(){
 	carrier = CARRIER_ON;
 	playUnit();
 	carrier = CARRIER_OFF;
 }
 
-void playDash()
-{
+void playDash(){
 	carrier = CARRIER_ON;
 	playUnit(); playUnit(); playUnit();
 	carrier = CARRIER_OFF;
 }
 
-void playShortSpace()
-{
+void playShortSpace(){
 	playUnit();
 }
 
-void playLetterSpace()
-{
+void playLetterSpace(){
 	playUnit(); playUnit(); playUnit();
 }
 
-void playWordSpace()
-{
+void playWordSpace(){
 	playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit();
 }
 
@@ -128,8 +122,7 @@ unsigned char button1 = ~(1 << PB6);
 unsigned char button2 = ~(1 << PB1);
 unsigned char button3 = ~(1 << PB4);
 
-ISR(PCINT_vect)
-{
+ISR(PCINT_vect){
 	static unsigned char i = 0;
 	unsigned char data = PINB;
 	
@@ -138,60 +131,48 @@ ISR(PCINT_vect)
 	_delay_ms(500);
 	EIFR |= 1 << PCIF;
 	
-	if(data == 0xff)
-	{
+	if(data == 0xff){
 		return;
 	}
+	
 	if(!(data & 0x01) || !(data & 0x02) || !(data & 0x04) || !(data & 0x08) || \
-	   !(data & 0x10) || !(data & 0x20) || !(data & 0x40) || !(data & 0x80))
-	{
-			if(i == 0)
-			{
+	   !(data & 0x10) || !(data & 0x20) || !(data & 0x40) || !(data & 0x80)){
+			if(i == 0){
 				PORTD &= ~( (1 << RED_LED) | (1 << GREEN_LED) );
-				if(data == button1)
-				{
+				if(data == button1){
 					i = 1;
 				}
-				else
-				{
+				else{
 					i = 0;
 					PORTD |= (1 << RED_LED);
 				}
 				
 				return;
 			}
-			else if(i == 1)
-			{
-				if(data == button2)
-				{
+			else if(i == 1){
+				if(data == button2){
 					i = 2;
 				}
-				else if(data == button1)
-				{
+				else if(data == button1){
 					i = 1;
 				}
-				else
-				{
+				else{
 					i = 0;
 					PORTD |= (1 << RED_LED);
 				}
 				
 				return;
 			}
-			else if(i == 2)
-			{
-				if(data == button3)
-				{
+			else if(i == 2){
+				if(data == button3){
 					playFlag = 1;
 					i = 0;
 					PORTD |= (1 << GREEN_LED);
 				}
-				else if(data == button1)
-				{
+				else if(data == button1){
 					i = 1;
 				}
-				else
-				{
+				else{
 					i = 0;
 					PORTD |= (1 << RED_LED);
 					return;
@@ -199,16 +180,13 @@ ISR(PCINT_vect)
 			}
 			
 	}
-	else
-	{
+	else{
 		i = 0;
 	}
 	
-	if(playFlag)
-	{
+	if(playFlag){
 		playFlag = MAX_REPEAT;
-		for(;playFlag > 0; playFlag--)
-		{
+		for(;playFlag > 0; playFlag--){
 			playMorsePhrase(morsePhraseToPlay, morseCode, numOfMorseCodeElements);
 			
 		}
@@ -216,8 +194,7 @@ ISR(PCINT_vect)
 }
 
 
-void main()
-{
+void main(){
 	PORTD &= ~( (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED) );
 	DDRD |= (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED);
 	PORTB = 0xff;
@@ -229,8 +206,7 @@ void main()
 	GIMSK |= (1 << PCIE);
 	SREG |= (1 << 7);
 	
-	while(1)
-	{
+	while(1){
 		;
 	}
 }
