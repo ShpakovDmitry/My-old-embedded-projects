@@ -16,7 +16,7 @@ typedef struct{
 	char *code;
 }MorseCode;
 
-const MorseCode morseCode[] = { 
+static const MorseCode morseCode[] = { 
 	{'0', "-----"}, {'A',    ".-"}, {'K',   "-.-"}, {'U', "..-"},
 	{'1', ".----"}, {'B',  "-..."}, {'L',  ".-.."}, {'V', "...-"},
 	{'2', "..---"}, {'C',  "-.-."}, {'M',    "--"}, {'W', ".--"},
