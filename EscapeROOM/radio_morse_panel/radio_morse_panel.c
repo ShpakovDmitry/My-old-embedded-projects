@@ -77,14 +77,13 @@ char* findMorseChar(char letter, const MorseCode* morseAlphabet){
 	return NULL;
 }
 
-void playMorseLetter(char letter, const MorseCode* morseAlphabet, const unsigned char numOfElements){
-	unsigned char letterPositionInAlphabet;
-	unsigned char i;
+void playMorseLetter(char letter, const MorseCode* morseAlphabet){
+	char* str;
 	
-	letterPositionInAlphabet = findMorseChar(letter, morseAlphabet, numOfElements);
+	str = findMorseChar(letter, morseAlphabet);
 	
-	for(i = 0; (morseAlphabet + letterPositionInAlphabet)->code[i] != '\0'; i++){
-		switch( (morseAlphabet + letterPositionInAlphabet)->code[i] ){
+	for(unsigned char i = 0; str[i] != '\0'; i++){
+		switch( str[i] ){
 			case '.' :
 				playDot();
 				break;
