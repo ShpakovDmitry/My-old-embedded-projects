@@ -26,7 +26,8 @@ const MorseCode morseCode[] = {
 	{'6', "-...."}, {'G',   "--."}, {'Q',  "--.-"},
 	{'7', "--..."}, {'H',  "...."}, {'R',   ".-."},
 	{'8', "---.."}, {'I',    ".."}, {'S',   "..."},
-	{'9', "----."}, {'J',  ".---"}, {'T',     "-"}
+	{'9', "----."}, {'J',  ".---"}, {'T',     "-"},
+	{0, NULL}
 };
 
 const unsigned char numOfMorseCodeElements = sizeof(morseCode) / sizeof(morseCode[0]);
