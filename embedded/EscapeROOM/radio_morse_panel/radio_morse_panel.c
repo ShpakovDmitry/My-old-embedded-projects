@@ -97,11 +97,9 @@ void playMorseLetter(char letter, const MorseCode* morseAlphabet){
 	return;
 }
 
-void playMorsePhrase(const char* morsePhraseToPlay, const MorseCode* morseAlphabet, const unsigned char numOfElements){
-		unsigned char i;
-		
-		for(i = 0; morsePhraseToPlay[i] != '\0'; i++){
-			playMorseLetter(morsePhraseToPlay[i], morseAlphabet, numOfElements);
+void playMorsePhrase(const char* morsePhraseToPlay, const MorseCode* morseAlphabet){
+		for(unsigned char i = 0; morsePhraseToPlay[i] != '\0'; i++){
+			playMorseLetter(morsePhraseToPlay[i], morseAlphabet);
 			playLetterSpace();
 		}
 		
