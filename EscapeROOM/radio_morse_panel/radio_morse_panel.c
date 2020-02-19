@@ -10,7 +10,6 @@
 #define GREEN_LED PD4
 #define MAX_MORSE_PARTS 5	// according to ITU maximal parts in one letter is five ex. '2' = "..---"
 
-// simply change the phrase to needed one, length is limited by flash memory size
 const char morsePhraseToPlay[] = "472";
 
 typedef struct{
@@ -18,7 +17,6 @@ typedef struct{
 	char code[MAX_MORSE_PARTS];
 }MorseCode;
 
-// Morse alphabet set; could be added another alphabet codes
 const MorseCode morseCode[] = { 
 	{'0', "-----"},
 	{'1', ".----"},
@@ -32,7 +30,6 @@ const MorseCode morseCode[] = {
 	{'9', "----."}
 };
 
-// get number of elements in our morse alphabet set
 const unsigned char numOfMorseCodeElements = sizeof(morseCode) / sizeof(morseCode[0]);
 
 unsigned char carrier = CARRIER_OFF;
@@ -80,7 +77,6 @@ void playWordSpace()
 unsigned char getLetterPositionInMorseAlphabet(char letter, const MorseCode* morseAlphabet, const unsigned char numOfElements){
 	unsigned char letterPosition;
 	
-	// simply compare each element in alphabet;
 	for(letterPosition = 0; letterPosition < numOfElements; letterPosition++){
 		if( (morseAlphabet + letterPosition)->symbol == letter)
 			break;
@@ -114,7 +110,6 @@ void playMorseLetter(char letter, const MorseCode* morseAlphabet, const unsigned
 void playMorsePhrase(const char* morsePhraseToPlay, const MorseCode* morseAlphabet, const unsigned char numOfElements){
 		unsigned char i;
 		
-		// play each letter until 'morsePhraseToPlay' end is not reached
 		for(i = 0; morsePhraseToPlay[i] != '\0'; i++){
 			playMorseLetter(morsePhraseToPlay[i], morseAlphabet, numOfElements);
 			playLetterSpace();
