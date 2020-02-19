@@ -8,13 +8,12 @@
 #define MAX_REPEAT 5
 #define RED_LED PD3
 #define GREEN_LED PD4
-#define MAX_MORSE_PARTS 5	// according to ITU maximal parts in one letter is five ex. '2' = "..---"
 
 const char morsePhraseToPlay[] = "472";
 
 typedef struct{
 	char symbol;
-	char code[MAX_MORSE_PARTS];
+	char *code;
 }MorseCode;
 
 const MorseCode morseCode[] = { 
