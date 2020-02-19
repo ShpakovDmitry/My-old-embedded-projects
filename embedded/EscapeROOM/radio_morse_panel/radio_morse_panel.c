@@ -27,7 +27,7 @@ const MorseCode morseCode[] = {
 	{'7', "--..."}, {'H',  "...."}, {'R',   ".-."},
 	{'8', "---.."}, {'I',    ".."}, {'S',   "..."},
 	{'9', "----."}, {'J',  ".---"}, {'T',     "-"},
-	{0, NULL}
+	{ 0, NULL}
 };
 
 const unsigned char numOfMorseCodeElements = sizeof(morseCode) / sizeof(morseCode[0]);
@@ -68,15 +68,13 @@ void playWordSpace(){
 	playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit();
 }
 
-unsigned char findMorseChar(char letter, const MorseCode* morseAlphabet, const unsigned char numOfElements){
-	unsigned char letterPosition;
-	
-	for(letterPosition = 0; letterPosition < numOfElements; letterPosition++){
-		if( (morseAlphabet + letterPosition)->symbol == letter)
-			break;
+char* findMorseChar(char letter, const MorseCode* morseAlphabet){
+	for(unsigned char i = 0; morseAlphabet[i]->symbol != 0; i++){
+		if( morseAlphabet[i]->symbol == letter)
+			return morseAlphabet[i]->code;
 	}
 	
-	return letterPosition;
+	return NULL;
 }
 
 void playMorseLetter(char letter, const MorseCode* morseAlphabet, const unsigned char numOfElements){
