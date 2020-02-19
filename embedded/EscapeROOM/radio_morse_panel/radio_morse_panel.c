@@ -68,7 +68,7 @@ void playWordSpace(){
 	playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit();
 }
 
-unsigned char getLetterPositionInMorseAlphabet(char letter, const MorseCode* morseAlphabet, const unsigned char numOfElements){
+unsigned char findMorseChar(char letter, const MorseCode* morseAlphabet, const unsigned char numOfElements){
 	unsigned char letterPosition;
 	
 	for(letterPosition = 0; letterPosition < numOfElements; letterPosition++){
@@ -83,7 +83,7 @@ void playMorseLetter(char letter, const MorseCode* morseAlphabet, const unsigned
 	unsigned char letterPositionInAlphabet;
 	unsigned char i;
 	
-	letterPositionInAlphabet = getLetterPositionInMorseAlphabet(letter, morseAlphabet, numOfElements);
+	letterPositionInAlphabet = findMorseChar(letter, morseAlphabet, numOfElements);
 	
 	for(i = 0; (morseAlphabet + letterPositionInAlphabet)->code[i] != '\0'; i++){
 		switch( (morseAlphabet + letterPositionInAlphabet)->code[i] ){
