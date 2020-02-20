@@ -12,45 +12,44 @@
 
 const char morsePhraseToPlay[] = "472";
 
-typedef struct{
+typedef struct {
 	char symbol;
 	char *code;
-}MorseCode;
+} MorseCode;
 
 
 unsigned char carrier = CARRIER_OFF;
 
-void playUnit(){
+void playUnit() {
 	unsigned char i;
 	
-	for(i = 0; i < DOT_DURATION; i++)
-	{
-		PORTD ^= ((1 << PD5) & carrier);
+	for ( i = 0; i < DOT_DURATION; i++ ) {
+		PORTD ^= ( (1 << PD5) & carrier );
 		_delay_ms(1);
 	}
 }
 
-void playDot(){
+void playDot() {
 	carrier = CARRIER_ON;
 	playUnit();
 	carrier = CARRIER_OFF;
 }
 
-void playDash(){
+void playDash() {
 	carrier = CARRIER_ON;
 	playUnit(); playUnit(); playUnit();
 	carrier = CARRIER_OFF;
 }
 
-void playShortSpace(){
+void playShortSpace() {
 	playUnit();
 }
 
-void playLetterSpace(){
+void playLetterSpace() {
 	playUnit(); playUnit(); playUnit();
 }
 
-void playWordSpace(){
+void playWordSpace() {
 	playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit();
 }
 
@@ -76,25 +75,27 @@ char* findMorseChar (char letter) {
 	while (low <= high) {
 		mid = (low + high) / 2;
 		
-		if ( letter < morseAlphabet[mid].symbol )
+		if ( letter < morseAlphabet[mid].symbol ) {
 			high = mid - 1;
-		else if (letter > morseAlphabet[mid].symbol )
+		} else if (letter > morseAlphabet[mid].symbol ) {
 			low = mid + 1;
-		else
+		} else {
 			return morseAlphabet[mid].code;
+		}
 	}
 	
 	return NULL;
 }
 
-void playMorseLetter(char letter){
-	char* str = findMorseChar(letter);
+void playMorseLetter (char letter) {
+	char* str = findMorseChar( letter );
 	
-	if (str == NULL) 
+	if ( str == NULL ) {
 		return;
+	}
 	
-	for(unsigned char i = 0; str[i] != '\0'; i++){
-		switch( str[i] ){
+	for (unsigned char i = 0; str[i] != '\0'; i++) {
+		switch ( str[i] ) {
 			case '.' :
 				playDot();
 				break;
@@ -102,14 +103,15 @@ void playMorseLetter(char letter){
 				playDash();
 				break;
 		}
+		
 		playShortSpace();
 	}
 	
 	return;
 }
 
-void playMorsePhrase(const char* morsePhraseToPlay){
-		for(unsigned char i = 0; morsePhraseToPlay[i] != '\0'; i++){
+void playMorsePhrase (const char* morsePhraseToPlay) {
+		for (unsigned char i = 0; morsePhraseToPlay[i] != '\0'; i++) {
 			playMorseLetter(morsePhraseToPlay[i]);
 			playLetterSpace();
 		}
@@ -127,7 +129,7 @@ unsigned char button1 = ~(1 << PB6);
 unsigned char button2 = ~(1 << PB1);
 unsigned char button3 = ~(1 << PB4);
 
-ISR(PCINT_vect){
+ISR (PCINT_vect) {
 	static unsigned char i = 0;
 	unsigned char data = PINB;
 	
@@ -141,43 +143,43 @@ ISR(PCINT_vect){
 	}
 	
 	if(!(data & 0x01) || !(data & 0x02) || !(data & 0x04) || !(data & 0x08) || \
-	   !(data & 0x10) || !(data & 0x20) || !(data & 0x40) || !(data & 0x80)){
-			if(i == 0){
+	   !(data & 0x10) || !(data & 0x20) || !(data & 0x40) || !(data & 0x80)) {
+			if (i == 0) {
 				PORTD &= ~( (1 << RED_LED) | (1 << GREEN_LED) );
-				if(data == button1){
+				if (data == button1) {
 					i = 1;
 				}
-				else{
+				else {
 					i = 0;
 					PORTD |= (1 << RED_LED);
 				}
 				
 				return;
 			}
-			else if(i == 1){
-				if(data == button2){
+			else if (i == 1) {
+				if (data == button2) {
 					i = 2;
 				}
-				else if(data == button1){
+				else if (data == button1) {
 					i = 1;
 				}
-				else{
+				else {
 					i = 0;
 					PORTD |= (1 << RED_LED);
 				}
 				
 				return;
 			}
-			else if(i == 2){
-				if(data == button3){
+			else if (i == 2) {
+				if (data == button3) {
 					playFlag = 1;
 					i = 0;
 					PORTD |= (1 << GREEN_LED);
 				}
-				else if(data == button1){
+				else if (data == button1) {
 					i = 1;
 				}
-				else{
+				else {
 					i = 0;
 					PORTD |= (1 << RED_LED);
 					return;
@@ -185,21 +187,20 @@ ISR(PCINT_vect){
 			}
 			
 	}
-	else{
+	else {
 		i = 0;
 	}
 	
-	if(playFlag){
+	if (playFlag) {
 		playFlag = MAX_REPEAT;
-		for(;playFlag > 0; playFlag--){
+		for (;playFlag > 0; playFlag--) {
 			playMorsePhrase(morsePhraseToPlay);
-			
 		}
 	}
 }
 
 
-void main(){
+void main() {
 	PORTD &= ~( (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED) );
 	DDRD |= (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED);
 	PORTB = 0xff;
@@ -211,7 +212,7 @@ void main(){
 	GIMSK |= (1 << PCIE);
 	SREG |= (1 << 7);
 	
-	while(1){
+	while(1) {
 		;
 	}
 }
