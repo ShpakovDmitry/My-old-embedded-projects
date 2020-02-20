@@ -87,10 +87,10 @@ char* findMorseChar (char letter) {
 	return NULL;
 }
 
-void playMorseLetter(char letter, const MorseCode* morseAlphabet){
+void playMorseLetter(char letter){
 	char* str;
 	
-	str = findMorseChar(letter, morseAlphabet);
+	str = findMorseChar(letter);
 	
 	for(unsigned char i = 0; str[i] != '\0'; i++){
 		switch( str[i] ){
@@ -107,9 +107,9 @@ void playMorseLetter(char letter, const MorseCode* morseAlphabet){
 	return;
 }
 
-void playMorsePhrase(const char* morsePhraseToPlay, const MorseCode* morseAlphabet){
+void playMorsePhrase(const char* morsePhraseToPlay){
 		for(unsigned char i = 0; morsePhraseToPlay[i] != '\0'; i++){
-			playMorseLetter(morsePhraseToPlay[i], morseAlphabet);
+			playMorseLetter(morsePhraseToPlay[i]);
 			playLetterSpace();
 		}
 		
@@ -191,7 +191,7 @@ ISR(PCINT_vect){
 	if(playFlag){
 		playFlag = MAX_REPEAT;
 		for(;playFlag > 0; playFlag--){
-			playMorsePhrase(morsePhraseToPlay, morseCode);
+			playMorsePhrase(morsePhraseToPlay);
 			
 		}
 	}
