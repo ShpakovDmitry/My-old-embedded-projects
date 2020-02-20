@@ -12,12 +12,6 @@
 
 const char morsePhraseToPlay[] = "472";
 
-typedef struct {
-	char symbol;
-	char *code;
-} MorseCode;
-
-
 unsigned char carrier = CARRIER_OFF;
 
 void playUnit() {
@@ -54,6 +48,11 @@ void playWordSpace() {
 }
 
 char* findMorseChar (char letter) {
+	typedef struct {
+		char symbol;
+		char *code;
+	} MorseCode;
+	
 	static const MorseCode morseAlphabet[] = { 
 		{'0', "-----"}, {'1', ".----"}, {'2', "..---"}, {'3', "...--"},
 		{'4', "....-"}, {'5', "....."},	{'6', "-...."}, {'7', "--..."},
