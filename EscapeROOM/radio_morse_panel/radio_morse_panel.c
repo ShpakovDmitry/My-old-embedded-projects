@@ -54,7 +54,7 @@ void playWordSpace(){
 	playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit();
 }
 
-char* findMorseChar (char letter, const MorseCode* morseAlphabet) {
+char* findMorseChar (char letter) {
 	static const MorseCode morseAlphabet[] = { 
 		{'0', "-----"}, {'1', ".----"}, {'2', "..---"}, {'3', "...--"},
 		{'4', "....-"}, {'5', "....."},	{'6', "-...."}, {'7', "--..."},
