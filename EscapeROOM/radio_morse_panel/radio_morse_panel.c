@@ -30,6 +30,8 @@ static const MorseCode morseCode[] = {
 	{ 0, NULL}
 };
 
+unsigned char morseAlphabetSize = (unsigned char) ( sizeof(morseCode) / sizeof(morseCode[0]) );
+
 
 unsigned char carrier = CARRIER_OFF;
 
@@ -67,10 +69,21 @@ void playWordSpace(){
 	playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit();
 }
 
-char* findMorseChar(char letter, const MorseCode* morseAlphabet){
-	for(unsigned char i = 0; morseAlphabet[i].symbol != 0; i++){
-		if( morseAlphabet[i].symbol == letter)
-			return morseAlphabet[i].code;
+char* findMorseChar (char letter, const MorseCode* morseAlphabet) {
+	unsigned char low, mid, high;
+	
+	low = 0;
+	high = morseAlphabetSize - 1;
+	
+	while (low <= high) {
+		mid = (low + high) / 2;
+		
+		if ( letter < morseAlphabet[mid].symbol )
+			high = mid - 1;
+		else if (letter > morseAlphabet[mid].symbol )
+			low = mid + 1;
+		else
+			return morseAlphabet[mid].code;
 	}
 	
 	return NULL;
