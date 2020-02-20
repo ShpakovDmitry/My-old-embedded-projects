@@ -55,7 +55,7 @@ void playWordSpace(){
 }
 
 char* findMorseChar (char letter, const MorseCode* morseAlphabet) {
-	static const MorseCode morseCode[] = { 
+	static const MorseCode morseAlphabet[] = { 
 		{'0', "-----"}, {'1', ".----"}, {'2', "..---"}, {'3', "...--"},
 		{'4', "....-"}, {'5', "....."},	{'6', "-...."}, {'7', "--..."},
 		{'8', "---.."}, {'9', "----."},	{'A',    ".-"}, {'B',  "-..."},
@@ -71,7 +71,7 @@ char* findMorseChar (char letter, const MorseCode* morseAlphabet) {
 	unsigned char low, mid, high;
 	
 	low = 0;
-	high = (unsigned char) ( sizeof(morseCode) / sizeof(morseCode[0]) ) - 1;
+	high = (unsigned char) ( sizeof(morseAlphabet) / sizeof(morseAlphabet[0]) ) - 1;
 	
 	while (low <= high) {
 		mid = (low + high) / 2;
