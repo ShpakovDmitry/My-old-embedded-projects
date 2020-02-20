@@ -88,9 +88,7 @@ char* findMorseChar (char letter) {
 }
 
 void playMorseLetter(char letter){
-	char* str;
-	
-	str = findMorseChar(letter);
+	char* str = findMorseChar(letter);
 	
 	for(unsigned char i = 0; str[i] != '\0'; i++){
 		switch( str[i] ){
