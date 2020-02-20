@@ -90,6 +90,9 @@ char* findMorseChar (char letter) {
 void playMorseLetter(char letter){
 	char* str = findMorseChar(letter);
 	
+	if (str == NULL) 
+		return;
+	
 	for(unsigned char i = 0; str[i] != '\0'; i++){
 		switch( str[i] ){
 			case '.' :
