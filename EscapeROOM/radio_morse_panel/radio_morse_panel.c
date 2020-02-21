@@ -90,6 +90,10 @@ char* findMorseChar (char letter) {
 void playMorseLetter (char letter) {
 	char* str = findMorseChar( letter );
 	
+	if ( letter == ' ' ) {
+		playWordSpace();
+	}
+
 	if ( str == NULL ) {
 		return;
 	}
