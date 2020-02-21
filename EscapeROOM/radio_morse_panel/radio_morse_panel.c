@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -9,161 +10,130 @@
 #define RED_LED PD3
 #define GREEN_LED PD4
 
+const char morsePhraseToPlay[] = "472";
+
 unsigned char carrier = CARRIER_OFF;
 
-void unit()
-{
+void playUnit() {
 	unsigned char i;
 	
-	for(i = 0; i < DOT_DURATION; i++)
-	{
-		PORTD ^= ((1 << PD5) & carrier);
+	for ( i = 0; i < DOT_DURATION; i++ ) {
+		PORTD ^= ( (1 << PD5) & carrier );
 		_delay_ms(1);
 	}
 }
 
-void dot()
-{
+void playDot() {
 	carrier = CARRIER_ON;
-	unit();
+	playUnit();
 	carrier = CARRIER_OFF;
 }
 
-void dash()
-{
+void playDash() {
 	carrier = CARRIER_ON;
-	unit(); unit(); unit();
+	playUnit(); playUnit(); playUnit();
 	carrier = CARRIER_OFF;
 }
 
-void short_space()
-{
-	unit();
+void playShortSpace() {
+	playUnit();
 }
 
-void letter_space()
-{
-	unit(); unit(); unit();
+void playLetterSpace() {
+	playUnit(); playUnit(); playUnit();
 }
 
-void word_space()
-{
-	unit(); unit(); unit(); unit(); unit(); unit(); unit();
+void playWordSpace() {
+	playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit();
 }
 
-void zero()
-{
-	dash(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dash();
+char* findMorseChar (char letter) {
+	typedef struct {
+		char symbol;
+		char *code;
+	} MorseCode;
+	
+	static const MorseCode morseAlphabet[] = { 
+		{' ',    NULL},
+		{'0', "-----"}, {'1', ".----"}, {'2', "..---"}, {'3', "...--"},
+		{'4', "....-"}, {'5', "....."},	{'6', "-...."}, {'7', "--..."},
+		{'8', "---.."}, {'9', "----."},	{'A',    ".-"}, {'B',  "-..."},
+		{'C',  "-.-."}, {'D',   "-.."}, {'E',     "."}, {'F',  "..-."},
+		{'G',   "--."}, {'H',  "...."}, {'I',    ".."}, {'J',  ".---"},
+		{'K',   "-.-"}, {'L',  ".-.."}, {'M',    "--"}, {'N',    "-."},
+		{'O',   "---"}, {'P',  ".--."}, {'Q',  "--.-"}, {'R',   ".-."},
+		{'S',   "..."}, {'T',     "-"}, {'U',   "..-"}, {'V',  "...-"},
+		{'W',   ".--"}, {'X',  "-..-"}, {'Y',  "-.--"}, {'Z',  "--.."},
+		{ 0,     NULL}
+	};
+	
+	unsigned char low, mid, high;
+	
+	low = 0;
+	high = (unsigned char) ( sizeof(morseAlphabet) / sizeof(morseAlphabet[0]) ) - 1;
+	
+	while (low <= high) {
+		mid = (low + high) / 2;
+		
+		if ( letter < morseAlphabet[mid].symbol ) {
+			high = mid - 1;
+		} else if (letter > morseAlphabet[mid].symbol ) {
+			low = mid + 1;
+		} else {
+			return morseAlphabet[mid].code;
+		}
+	}
+	
+	return NULL;
 }
 
+void playMorseLetter (char letter) {
+	char* str = findMorseChar( letter );
+	
+	if ( letter == ' ' ) {
+		playWordSpace();
+	}
 
-void one()
-{
-	dot();  short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dash();
+	if ( str == NULL ) {
+		return;
+	}
+	
+	for (unsigned char i = 0; str[i] != '\0'; i++) {
+		switch ( str[i] ) {
+			case '.' :
+				playDot();
+				break;
+			case '-' :
+				playDash();
+				break;
+		}
+		
+		playShortSpace();
+	}
+	
+	return;
 }
 
-
-void two()
-{
-	dot(); short_space();
-	dot(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dash();
-}
-
-
-void three()
-{
-	dot(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dash(); short_space();
-	dash();
-}
-
-
-void four()
-{
-	dot(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dash();
-}
-
-
-void five()
-{
-	dot(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dot();
-}
-
-void six()
-{
-	dash(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dot();
-}
-
-void seven()
-{
-	dash(); short_space();
-	dash(); short_space();
-	dot(); short_space();
-	dot(); short_space();
-	dot();
-}
-
-void eight()
-{
-	dash(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dot(); short_space();
-	dot();
-}
-
-void nine()
-{
-	dash(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dash(); short_space();
-	dot();
+void playMorsePhrase (const char* morsePhraseToPlay) {
+		for (unsigned char i = 0; morsePhraseToPlay[i] != '\0'; i++) {
+			playMorseLetter(morsePhraseToPlay[i]);
+			playLetterSpace();
+		}
+		
+		playWordSpace();
+		
+		return;
 }
 
 
-void phrase()
-{
-	four(); letter_space();
-	seven(); letter_space();
-	two();
-	word_space();
-}
-
-unsigned char play_flag = 0;
+unsigned char playFlag = 0;
 unsigned char button = 0;
 
 unsigned char button1 = ~(1 << PB6);
 unsigned char button2 = ~(1 << PB1);
 unsigned char button3 = ~(1 << PB4);
 
-ISR(PCINT_vect)
-{
+ISR (PCINT_vect) {
 	static unsigned char i = 0;
 	unsigned char data = PINB;
 	
@@ -172,60 +142,48 @@ ISR(PCINT_vect)
 	_delay_ms(500);
 	EIFR |= 1 << PCIF;
 	
-	if(data == 0xff)
-	{
+	if(data == 0xff){
 		return;
 	}
+	
 	if(!(data & 0x01) || !(data & 0x02) || !(data & 0x04) || !(data & 0x08) || \
-	   !(data & 0x10) || !(data & 0x20) || !(data & 0x40) || !(data & 0x80))
-	{
-			if(i == 0)
-			{
+	   !(data & 0x10) || !(data & 0x20) || !(data & 0x40) || !(data & 0x80)) {
+			if (i == 0) {
 				PORTD &= ~( (1 << RED_LED) | (1 << GREEN_LED) );
-				if(data == button1)
-				{
+				if (data == button1) {
 					i = 1;
 				}
-				else
-				{
+				else {
 					i = 0;
 					PORTD |= (1 << RED_LED);
 				}
 				
 				return;
 			}
-			else if(i == 1)
-			{
-				if(data == button2)
-				{
+			else if (i == 1) {
+				if (data == button2) {
 					i = 2;
 				}
-				else if(data == button1)
-				{
+				else if (data == button1) {
 					i = 1;
 				}
-				else
-				{
+				else {
 					i = 0;
 					PORTD |= (1 << RED_LED);
 				}
 				
 				return;
 			}
-			else if(i == 2)
-			{
-				if(data == button3)
-				{
-					play_flag = 1;
+			else if (i == 2) {
+				if (data == button3) {
+					playFlag = 1;
 					i = 0;
 					PORTD |= (1 << GREEN_LED);
 				}
-				else if(data == button1)
-				{
+				else if (data == button1) {
 					i = 1;
 				}
-				else
-				{
+				else {
 					i = 0;
 					PORTD |= (1 << RED_LED);
 					return;
@@ -233,24 +191,20 @@ ISR(PCINT_vect)
 			}
 			
 	}
-	else
-	{
+	else {
 		i = 0;
 	}
 	
-	if(play_flag)
-	{
-		play_flag = MAX_REPEAT;
-		for(;play_flag > 0; play_flag--)
-		{
-			phrase();
+	if (playFlag) {
+		playFlag = MAX_REPEAT;
+		for (;playFlag > 0; playFlag--) {
+			playMorsePhrase(morsePhraseToPlay);
 		}
 	}
 }
 
 
-void main()
-{
+void main() {
 	PORTD &= ~( (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED) );
 	DDRD |= (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED);
 	PORTB = 0xff;
@@ -262,8 +216,7 @@ void main()
 	GIMSK |= (1 << PCIE);
 	SREG |= (1 << 7);
 	
-	while(1)
-	{
+	while(1) {
 		;
 	}
 }
