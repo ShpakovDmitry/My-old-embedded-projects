@@ -1,10 +1,5 @@
 ### Coding style guidelines
 
-This guidelines were created thanks to [**Krišjāns Bluķis**](https://github.com/krisjans),
-[**C++ Programming Style Guidelines**](http://geosoft.no/development/cppstyle.html) and
-from my observations of coding style from
-[The C Programming Language](https://en.wikipedia.org/wiki/The_C_Programming_Language)
-book by **K&R**.
 
 - This guidelines are used as reminder for my personal purposes and use.
 - This coding guidelines are just recommendation and could be violated if code may become way better
@@ -104,7 +99,9 @@ void functionName (int paramName) {
 }
 ```
 
+##### For more information, please visit
 
+[**C++ Programming Style Guidelines**](http://geosoft.no/development/cppstyle.html)
 
 
 
