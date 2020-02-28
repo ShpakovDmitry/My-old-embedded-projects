@@ -133,6 +133,29 @@ unsigned char button1 = ~(1 << PB6);
 unsigned char button2 = ~(1 << PB1);
 unsigned char button3 = ~(1 << PB4);
 
+enum Logic = { FALSE, TRUE };
+enum ButtonState = { PRESSED, RELEASED, HOLD };
+
+typedef struct {
+	unsigned char port;
+	unsigned char pin : 3;
+	unsigned char isPressed : 1;
+	unsigned char isReleased : 1;
+	unsigned char isHold : 1;
+	unsigned char lastState : 2;
+} Button;
+
+Button buttons[] = {
+	{ PORTB, PB0, FALSE, TRUE, FALSE, RELEASED },
+	{ PORTB, PB1, FALSE, TRUE, FALSE, RELEASED },
+	{ PORTB, PB2, FALSE, TRUE, FALSE, RELEASED },
+	{ PORTB, PB3, FALSE, TRUE, FALSE, RELEASED },
+	{ PORTB, PB4, FALSE, TRUE, FALSE, RELEASED },
+	{ PORTB, PB5, FALSE, TRUE, FALSE, RELEASED },
+	{ PORTB, PB6, FALSE, TRUE, FALSE, RELEASED },
+	{ PORTB, PB7, FALSE, TRUE, FALSE, RELEASED }
+}
+
 ISR (PCINT_vect) {
 	static unsigned char i = 0;
 	unsigned char data = PINB;
