@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>	// true, false
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -133,8 +134,7 @@ unsigned char button1 = ~(1 << PB6);
 unsigned char button2 = ~(1 << PB1);
 unsigned char button3 = ~(1 << PB4);
 
-enum Logic = { FALSE, TRUE };
-enum ButtonState = { PRESSED, RELEASED, HOLD };
+enum ButtonState { PRESSED, RELEASED, HOLD };
 
 typedef struct {
 	unsigned char port;
@@ -146,15 +146,15 @@ typedef struct {
 } Button;
 
 Button buttons[] = {
-	{ PORTB, PB0, FALSE, TRUE, FALSE, RELEASED },
-	{ PORTB, PB1, FALSE, TRUE, FALSE, RELEASED },
-	{ PORTB, PB2, FALSE, TRUE, FALSE, RELEASED },
-	{ PORTB, PB3, FALSE, TRUE, FALSE, RELEASED },
-	{ PORTB, PB4, FALSE, TRUE, FALSE, RELEASED },
-	{ PORTB, PB5, FALSE, TRUE, FALSE, RELEASED },
-	{ PORTB, PB6, FALSE, TRUE, FALSE, RELEASED },
-	{ PORTB, PB7, FALSE, TRUE, FALSE, RELEASED }
-}
+	{ PORTB, PB0, false, true, false, RELEASED },
+	{ PORTB, PB1, false, true, false, RELEASED },
+	{ PORTB, PB2, false, true, false, RELEASED },
+	{ PORTB, PB3, false, true, false, RELEASED },
+	{ PORTB, PB4, false, true, false, RELEASED },
+	{ PORTB, PB5, false, true, false, RELEASED },
+	{ PORTB, PB6, false, true, false, RELEASED },
+	{ PORTB, PB7, false, true, false, RELEASED }
+};
 
 ISR (PCINT_vect) {
 	static unsigned char i = 0;
