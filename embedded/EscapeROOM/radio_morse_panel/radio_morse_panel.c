@@ -137,7 +137,6 @@ unsigned char button3 = ~(1 << PB4);
 enum ButtonState { PRESSED, RELEASED, HOLD };
 
 typedef struct {
-	unsigned char port;
 	unsigned char pin : 3;
 	unsigned char isPressed : 1;
 	unsigned char isReleased : 1;
@@ -146,14 +145,14 @@ typedef struct {
 } Button;
 
 Button buttons[] = {
-	{ PORTB, PB0, false, true, false, RELEASED },
-	{ PORTB, PB1, false, true, false, RELEASED },
-	{ PORTB, PB2, false, true, false, RELEASED },
-	{ PORTB, PB3, false, true, false, RELEASED },
-	{ PORTB, PB4, false, true, false, RELEASED },
-	{ PORTB, PB5, false, true, false, RELEASED },
-	{ PORTB, PB6, false, true, false, RELEASED },
-	{ PORTB, PB7, false, true, false, RELEASED }
+	{ PB0, false, true, false, RELEASED },
+	{ PB1, false, true, false, RELEASED },
+	{ PB2, false, true, false, RELEASED },
+	{ PB3, false, true, false, RELEASED },
+	{ PB4, false, true, false, RELEASED },
+	{ PB5, false, true, false, RELEASED },
+	{ PB6, false, true, false, RELEASED },
+	{ PB7, false, true, false, RELEASED }
 };
 
 ISR (PCINT_vect) {
