@@ -3,6 +3,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
+#include <stdint.h>		// uint32_t;
 
 #define CARRIER_ON	(1 << PD5)
 #define CARRIER_OFF	(0 << PD5)
@@ -10,6 +11,8 @@
 #define MAX_REPEAT 5
 #define RED_LED PD3
 #define GREEN_LED PD4
+
+static volatile uint32_t msFromReset;
 
 const char morsePhraseToPlay[] = "472";
 
@@ -126,7 +129,6 @@ void playMorsePhrase (const char* morsePhraseToPlay) {
 		return;
 }
 
-
 unsigned char playFlag = 0;
 unsigned char button = 0;
 
@@ -225,6 +227,9 @@ ISR (PCINT_vect) {
 	}
 }
 
+ISR (TIMER0_COMPA_vect) {
+	msFromReset++;
+}
 
 void main() {
 	PORTD &= ~( (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED) );
@@ -232,6 +237,17 @@ void main() {
 	PORTB = 0xff;
 	DDRB = 0x00;
 	unsigned char k;
+	
+	//init TIMER0 in CTC mode, to generate 1ms frequency interrupt, assuming that F_CPU = 16 MHz
+	TCCR0A |= (1 << WGM01);
+	// 1/64 F_CPU prescaler
+	TCCR0B |= (0 << CS02) | (1 << CS01) | (1 << CS00);
+	//
+	OCR0A = 250;
+	// enable output compare A match interrupt
+	TIMSK |= (1 << OCIE0A);
+	// start counting ms at this point; actually when glob interrupt flag is set
+	msFromReset = 0;
 	
 	PCMSK = (1 << PCINT7) | (1 << PCINT6) | (1 << PCINT5) | (1 << PCINT4) | \
 		 (1 << PCINT3) | (1 << PCINT2) | (1 << PCINT1) | (1 << PCINT0);
