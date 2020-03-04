@@ -231,14 +231,8 @@ ISR (TIMER0_COMPA_vect) {
 	msFromReset++;
 }
 
-void main() {
-	PORTD &= ~( (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED) );
-	DDRD |= (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED);
-	PORTB = 0xff;
-	DDRB = 0x00;
-	unsigned char k;
-	
-	//init TIMER0 in CTC mode, to generate 1ms frequency interrupt, assuming that F_CPU = 16 MHz
+void initTimer0(void) {
+ 	//init TIMER0 in CTC mode, to generate 1ms frequency interrupt, assuming that F_CPU = 16 MHz
 	TCCR0A |= (1 << WGM01);
 	// 1/64 F_CPU prescaler
 	TCCR0B |= (0 << CS02) | (1 << CS01) | (1 << CS00);
@@ -247,7 +241,17 @@ void main() {
 	// enable output compare A match interrupt
 	TIMSK |= (1 << OCIE0A);
 	// start counting ms at this point; actually when glob interrupt flag is set
-	msFromReset = 0;
+	msFromReset = 0;   
+}
+
+void main() {
+	PORTD &= ~( (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED) );
+	DDRD |= (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED);
+	PORTB = 0xff;
+	DDRB = 0x00;
+	unsigned char k;
+    
+    initTimer0();
 	
 	PCMSK = (1 << PCINT7) | (1 << PCINT6) | (1 << PCINT5) | (1 << PCINT4) | \
 		 (1 << PCINT3) | (1 << PCINT2) | (1 << PCINT1) | (1 << PCINT0);
