@@ -227,8 +227,18 @@ ISR (PCINT_vect) {
 	}
 }
 
+volatile unsigned char pinB;    // here we store RAW PINB data
+
 ISR (TIMER0_COMPA_vect) {
 	msFromReset++;
+    pinB = PINB;
+}
+
+void updateButtonState(void) {
+    for (unsigned char i = 0; i < 8; i++) {
+        buttons[i].lastState = ( buttons[i].isPressed == true ) ? PRESSED : RELEASED;
+        buttons[i].isPressed = ( pinB & (1 << buttons[i].pin) ) ? false : true;
+    }
 }
 
 void initTimer0(void) {
