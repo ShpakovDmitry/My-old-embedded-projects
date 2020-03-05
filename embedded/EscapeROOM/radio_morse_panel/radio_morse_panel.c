@@ -131,13 +131,6 @@ void playMorsePhrase (const char* morsePhraseToPlay) {
 		return;
 }
 
-unsigned char playFlag = 0;
-unsigned char button = 0;
-
-unsigned char button1 = ~(1 << PB6);
-unsigned char button2 = ~(1 << PB1);
-unsigned char button3 = ~(1 << PB4);
-
 enum ButtonState { PRESSED, RELEASED, HOLD };
 
 typedef struct {
@@ -258,9 +251,6 @@ void main() {
     
     initTimer0();
 		
-	PCMSK = (1 << PCINT7) | (1 << PCINT6) | (1 << PCINT5) | (1 << PCINT4) | \
-		 (1 << PCINT3) | (1 << PCINT2) | (1 << PCINT1) | (1 << PCINT0);
-	GIMSK |= (1 << PCIE);
 	SREG |= (1 << 7);
 	
 	initCyclicBuffer(&cyclicBuffer);
