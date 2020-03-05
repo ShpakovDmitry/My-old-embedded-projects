@@ -146,17 +146,18 @@ typedef struct {
 	unsigned char isHold : 1;
 	unsigned char lastState : 2;
 	char keyChar;
+	uint16_t lastDebounceTime;
 } Button;
 
 Button buttons[] = {
-	{ PB0, false, true, false, RELEASED, '1' },
-	{ PB1, false, true, false, RELEASED, '2'},
-	{ PB2, false, true, false, RELEASED, '3'},
-	{ PB3, false, true, false, RELEASED, '4'},
-	{ PB4, false, true, false, RELEASED, '5'},
-	{ PB5, false, true, false, RELEASED, '6'},
-	{ PB6, false, true, false, RELEASED, '7'},
-	{ PB7, false, true, false, RELEASED, '8'}
+	{ PB0, false, true, false, RELEASED, '1', 0x0000},
+	{ PB1, false, true, false, RELEASED, '2', 0x0000},
+	{ PB2, false, true, false, RELEASED, '3', 0x0000},
+	{ PB3, false, true, false, RELEASED, '4', 0x0000},
+	{ PB4, false, true, false, RELEASED, '5', 0x0000},
+	{ PB5, false, true, false, RELEASED, '6', 0x0000},
+	{ PB6, false, true, false, RELEASED, '7', 0x0000},
+	{ PB7, false, true, false, RELEASED, '8', 0x0000}
 };
 
 ISR (PCINT_vect) {
@@ -241,6 +242,7 @@ ISR (TIMER0_COMPA_vect) {
 void updateButtonState(void) {
     if (flagBtnUpdateValid == true) {
         for (unsigned char i = 0; i < 8; i++) {
+			
             buttons[i].lastState = ( buttons[i].isPressed == true ) ? PRESSED : RELEASED;
             buttons[i].isPressed = ( pinB & (1 << buttons[i].pin) ) ? false : true;
         }
