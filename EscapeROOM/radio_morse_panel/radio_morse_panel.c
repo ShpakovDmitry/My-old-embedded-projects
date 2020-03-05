@@ -144,17 +144,18 @@ typedef struct {
 	unsigned char isReleased : 1;
 	unsigned char isHold : 1;
 	unsigned char lastState : 2;
+	char keyChar;
 } Button;
 
 Button buttons[] = {
-	{ PB0, false, true, false, RELEASED },
-	{ PB1, false, true, false, RELEASED },
-	{ PB2, false, true, false, RELEASED },
-	{ PB3, false, true, false, RELEASED },
-	{ PB4, false, true, false, RELEASED },
-	{ PB5, false, true, false, RELEASED },
-	{ PB6, false, true, false, RELEASED },
-	{ PB7, false, true, false, RELEASED }
+	{ PB0, false, true, false, RELEASED, '1' },
+	{ PB1, false, true, false, RELEASED, '2'},
+	{ PB2, false, true, false, RELEASED, '3'},
+	{ PB3, false, true, false, RELEASED, '4'},
+	{ PB4, false, true, false, RELEASED, '5'},
+	{ PB5, false, true, false, RELEASED, '6'},
+	{ PB6, false, true, false, RELEASED, '7'},
+	{ PB7, false, true, false, RELEASED, '8'}
 };
 
 ISR (PCINT_vect) {
