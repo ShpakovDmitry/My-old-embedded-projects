@@ -336,7 +336,7 @@ void main() {
 	initCyclicBuffer(&cyclicBuffer);
 	
 	while(1) {
-		;
+		updateButtonState();
 	}
 }
 
