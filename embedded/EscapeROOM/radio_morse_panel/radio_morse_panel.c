@@ -327,11 +327,13 @@ void main() {
 	unsigned char k;
     
     initTimer0();
-	
+		
 	PCMSK = (1 << PCINT7) | (1 << PCINT6) | (1 << PCINT5) | (1 << PCINT4) | \
 		 (1 << PCINT3) | (1 << PCINT2) | (1 << PCINT1) | (1 << PCINT0);
 	GIMSK |= (1 << PCIE);
 	SREG |= (1 << 7);
+	
+	initCyclicBuffer(&cyclicBuffer);
 	
 	while(1) {
 		;
