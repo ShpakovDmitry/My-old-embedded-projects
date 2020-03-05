@@ -229,6 +229,13 @@ void updateButtonState(void) {
     }
 }
 
+void initIO(void) {
+	PORTD &= ~( (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED) );
+	DDRD |= (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED);
+	PORTB = 0xff;
+	DDRB = 0x00;
+}
+
 void initTimer0(void) {
  	//init TIMER0 in CTC mode, to generate 1ms frequency interrupt, assuming that F_CPU = 16 MHz
 	TCCR0A |= (1 << WGM01);
@@ -242,16 +249,14 @@ void initTimer0(void) {
 	msFromReset = 0;   
 }
 
-void main() {
-	PORTD &= ~( (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED) );
-	DDRD |= (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED);
-	PORTB = 0xff;
-	DDRB = 0x00;
-	unsigned char k;
-    
-    initTimer0();
-		
+void initContoroller(void) {
+	initIO();
+	initTimer0();
 	SREG |= (1 << 7);
+}
+
+void main() {
+    initContoroller();
 	
 	initCyclicBuffer(&cyclicBuffer);
 	
