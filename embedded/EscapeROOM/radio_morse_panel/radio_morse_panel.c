@@ -15,6 +15,7 @@
 static volatile uint32_t msFromReset;
 
 const char morsePhraseToPlay[] = "472";
+const char keysToPress[] = "357";
 
 unsigned char carrier = CARRIER_OFF;
 
