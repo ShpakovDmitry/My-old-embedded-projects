@@ -296,7 +296,7 @@ void updateButtonState(void) {
 				if (buttonTmp != buttons[i].currState) {
 					buttons[i].currState = buttonTmp;
 					if (buttons[i].currState == PRESSED) {
-						updateButtonPressBuff(buttons[i].keyChar);
+						addCharToCyclicBuffer(&cyclicBuffer, buttons[i].keyChar);
 					}
 				}
 			}
