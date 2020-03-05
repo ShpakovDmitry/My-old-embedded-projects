@@ -16,6 +16,7 @@ static volatile uint32_t msFromReset;
 
 const char morsePhraseToPlay[] = "472";
 const char keysToPress[] = "357";
+#define PASS_LEN sizeof(keysToPress) / sizeof(keysToPress[0])
 
 unsigned char carrier = CARRIER_OFF;
 
@@ -231,6 +232,49 @@ ISR (PCINT_vect) {
 volatile unsigned char pinB;    // here we store RAW PINB data
 volatile bool flagBtnUpdateValid = false;
 uint32_t debounceTime = 100;
+
+// cyclic buffer implementation
+typedef struct {
+	char buff[PASS_LEN];
+	unsigned char pos;
+	unsigned char size;
+}CyclicBuffer;
+
+// functions to handle cyclic buffer
+void initCyclicBuffer(CyclicBuffer *buff);
+void addCharToCyclicBuffer(CyclicBuffer *buff, const char ch);
+bool findSequenceInCyclicBuffer(CyclicBuffer *buff, const char *seq);
+
+CyclicBuffer cyclicBuffer;
+
+void initCyclicBuffer(CyclicBuffer *buff) {
+	buff->pos = 0;
+	buff->size = PASS_LEN;
+}
+
+void addCharToCyclicBuffer(CyclicBuffer *buff, const char ch) {
+	*(buff->buff + buff->pos) = ch;
+	if (buff->pos == buff->size - 1) {
+		buff->pos = 0;
+	}
+	else {
+		buff->pos += 1;
+	}
+}
+
+bool findSequenceInCyclicBuffer(CyclicBuffer *buff, const char *seq) {
+	unsigned char i;
+	bool flag = true;
+	
+	for(i = 0; i < buff->size && seq[i] != '\0'; ++i)
+	{
+		if( *(buff->buff + (buff->pos + i) % (buff->size) ) != seq[i] )
+			flag = false;
+	}
+	
+	return flag;
+}
+
 
 ISR (TIMER0_COMPA_vect) {
 	msFromReset++;
