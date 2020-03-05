@@ -148,14 +148,14 @@ typedef struct {
 } Button;
 
 Button buttons[] = {
-	{ PB0, RELEASED RELEASED, '1', 0x0000},
-	{ PB1, RELEASED RELEASED, '2', 0x0000},
-	{ PB2, RELEASED RELEASED, '3', 0x0000},
-	{ PB3, RELEASED RELEASED, '4', 0x0000},
-	{ PB4, RELEASED RELEASED, '5', 0x0000},
-	{ PB5, RELEASED RELEASED, '6', 0x0000},
-	{ PB6, RELEASED RELEASED, '7', 0x0000},
-	{ PB7, RELEASED RELEASED, '8', 0x0000}
+	{ PB0, RELEASED, RELEASED, '1', 0x0000},
+	{ PB1, RELEASED, RELEASED, '2', 0x0000},
+	{ PB2, RELEASED, RELEASED, '3', 0x0000},
+	{ PB3, RELEASED, RELEASED, '4', 0x0000},
+	{ PB4, RELEASED, RELEASED, '5', 0x0000},
+	{ PB5, RELEASED, RELEASED, '6', 0x0000},
+	{ PB6, RELEASED, RELEASED, '7', 0x0000},
+	{ PB7, RELEASED, RELEASED, '8', 0x0000}
 };
 
 ISR (PCINT_vect) {
@@ -230,6 +230,7 @@ ISR (PCINT_vect) {
 
 volatile unsigned char pinB;    // here we store RAW PINB data
 volatile bool flagBtnUpdateValid = false;
+uint32_t debounceTime = 100;
 
 ISR (TIMER0_COMPA_vect) {
 	msFromReset++;
@@ -239,10 +240,23 @@ ISR (TIMER0_COMPA_vect) {
 
 void updateButtonState(void) {
     if (flagBtnUpdateValid == true) {
+		// low-pass-filter using debounce time
         for (unsigned char i = 0; i < 8; i++) {
+			uint8_t buttonTmp = ( pinB & (1 << buttons[i].pin) ) ? RELEASED : PRESSED;
 			
-            buttons[i].lastState = ( buttons[i].isPressed == true ) ? PRESSED : RELEASED;
-            buttons[i].isPressed = ( pinB & (1 << buttons[i].pin) ) ? false : true;
+			if (buttonTmp != buttons[i].lastState) {
+				buttons[i].lastDebounceTime = msFromReset;
+			}
+			
+			if ( (msFromReset - buttons[i].lastDebounceTime ) > debounceTime) {
+				if (buttonTmp != buttons[i].currState) {
+					buttons[i].currState = buttonTmp;
+					if (buttons[i].currState == PRESSED) {
+						updateButtonPressBuff(buttons[i].keyChar);
+					}
+				}
+			}
+			buttons[i].lastState = buttonTmp;
         }
         flagBtnUpdateValid = false;
     }
