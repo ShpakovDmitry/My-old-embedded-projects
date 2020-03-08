@@ -152,6 +152,9 @@ Button buttons[] = {
 	{ PB7, RELEASED, RELEASED, '8', 0x0000}
 };
 
+#define ALL_RELEASED (1 << PB0) | (1 << PB1) | (1 << PB2) | (1 << PB3) | (1 << PB4) \
+				   | (1 << PB5) | (1 << PB6) | (1 << PB7)
+
 uint32_t debounceTime = 100;
 
 // cyclic buffer implementation
@@ -205,26 +208,26 @@ void updateButtonState(void) {
 	if (oldMs != msFromReset) {
 		oldMs = msFromReset;
 		unsigned char cachedPinB = PINB;
+		static unsigned char currButtonState = ALL_RELEASED;
+		static unsigned char lastButtonState = ALL_RELEASED;
+		static uint32_t lastDebounceTime;
 		
-		// low-pass-filter using debounce time
-        for (unsigned char i = 0; i < 8; i++) {
-			uint8_t buttonTmp = ( cachedPinB & (1 << buttons[i].pin) ) ? RELEASED : PRESSED;
-			uint32_t lastDebounceTime;
-			
-			if (buttonTmp != buttons[i].lastState) {
-				lastDebounceTime = msFromReset;
-			}
-			
-			if ( (msFromReset - lastDebounceTime ) > debounceTime) {
-				if (buttonTmp != buttons[i].currState) {
-					buttons[i].currState = buttonTmp;
-					if (buttons[i].currState == PRESSED) {
-						addCharToCyclicBuffer(&cyclicBuffer, buttons[i].keyChar);
-					}
+		lastDebounceTime = msFromReset;
+		
+		if (cachedPinB != lastButtonState) {
+			lastDebounceTime = msFromReset;
+		}
+		
+		if ( (msFromReset - lastDebounceTime) > debounceTime ) {
+			if (cachedPinB != currButtonState) {
+				currButtonState = cachedPinB;
+				//TODO complete 
+				if(currButtonState == PRESSED) {
+					addCharToCyclicBuffer(&cyclicBuffer, buttons[i].keyChar);
 				}
 			}
-			buttons[i].lastState = buttonTmp;
-        }
+		}
+		lastButtonState = cachedPinB;
 	}
 }
 
