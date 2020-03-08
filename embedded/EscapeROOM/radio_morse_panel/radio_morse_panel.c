@@ -152,8 +152,6 @@ Button buttons[] = {
 	{ PB7, RELEASED, RELEASED, '8', 0x0000}
 };
 
-volatile unsigned char cachedPinB;
-volatile bool flagBtnUpdateValid = false;
 uint32_t debounceTime = 100;
 
 // cyclic buffer implementation
@@ -199,12 +197,15 @@ bool findSequenceInCyclicBuffer(CyclicBuffer *buff, const char *seq) {
 
 ISR (TIMER0_COMPA_vect) {
 	msFromReset++;
-    cachedPinB = PINB;
-    flagBtnUpdateValid = true;
 }
 
 void updateButtonState(void) {
-    if (flagBtnUpdateValid == true) {
+	static uint32_t oldMs = 0;
+	
+	if (oldMs != msFromReset) {
+		oldMs = msFromReset;
+		unsigned char cachedPinB = PINB;
+		
 		// low-pass-filter using debounce time
         for (unsigned char i = 0; i < 8; i++) {
 			uint8_t buttonTmp = ( cachedPinB & (1 << buttons[i].pin) ) ? RELEASED : PRESSED;
@@ -223,8 +224,7 @@ void updateButtonState(void) {
 			}
 			buttons[i].lastState = buttonTmp;
         }
-        flagBtnUpdateValid = false;
-    }
+	}
 }
 
 void initIO(void) {
