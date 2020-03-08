@@ -176,7 +176,7 @@ void initCyclicBuffer(CyclicBuffer *buff) {
 }
 
 void addCharToCyclicBuffer(CyclicBuffer *buff, const char ch) {
-	*(buff->buff + buff->pos) = ch;
+	buff->buff[buff->pos] = ch;
 	buff->pos++;
 	if (buff->pos >= buff->size) {
 		buff->pos = 0;
@@ -189,7 +189,7 @@ bool findSequenceInCyclicBuffer(CyclicBuffer *buff, const char *seq) {
 	
 	for(i = 0; i < buff->size && seq[i] != '\0'; ++i)
 	{
-		if( *(buff->buff + (buff->pos + i) % (buff->size) ) != seq[i] )
+		if( buff->buff[(buff->pos + i) % (buff->size)] != seq[i] )
 			flag = false;
 	}
 	
