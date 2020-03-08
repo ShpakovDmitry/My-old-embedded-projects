@@ -209,12 +209,13 @@ void updateButtonState(void) {
 		// low-pass-filter using debounce time
         for (unsigned char i = 0; i < 8; i++) {
 			uint8_t buttonTmp = ( cachedPinB & (1 << buttons[i].pin) ) ? RELEASED : PRESSED;
+			uint32_t lastDebounceTime;
 			
 			if (buttonTmp != buttons[i].lastState) {
-				buttons[i].lastDebounceTime = msFromReset;
+				lastDebounceTime = msFromReset;
 			}
 			
-			if ( (msFromReset - buttons[i].lastDebounceTime ) > debounceTime) {
+			if ( (msFromReset - lastDebounceTime ) > debounceTime) {
 				if (buttonTmp != buttons[i].currState) {
 					buttons[i].currState = buttonTmp;
 					if (buttons[i].currState == PRESSED) {
