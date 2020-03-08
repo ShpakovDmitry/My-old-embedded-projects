@@ -177,11 +177,9 @@ void initCyclicBuffer(CyclicBuffer *buff) {
 
 void addCharToCyclicBuffer(CyclicBuffer *buff, const char ch) {
 	*(buff->buff + buff->pos) = ch;
-	if (buff->pos == buff->size - 1) {
+	buff->pos++;
+	if (buff->pos >= buff->size) {
 		buff->pos = 0;
-	}
-	else {
-		buff->pos += 1;
 	}
 }
 
