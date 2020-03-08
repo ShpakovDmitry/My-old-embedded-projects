@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include <stdbool.h>	// true, false
+#include <stdbool.h>
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
-#include <stdint.h>		// uint32_t;
+#include <stdint.h>
 
 #define CARRIER_ON	(1 << PD5)
 #define CARRIER_OFF	(0 << PD5)
