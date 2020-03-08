@@ -158,9 +158,9 @@ uint32_t debounceTime = 100;
 
 // cyclic buffer implementation
 typedef struct {
-	char buff[PASS_LEN];
 	unsigned char pos;
 	unsigned char size;
+	char buff[PASS_LEN];
 }CyclicBuffer;
 
 // functions to handle cyclic buffer
