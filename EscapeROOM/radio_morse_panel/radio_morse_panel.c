@@ -152,7 +152,7 @@ Button buttons[] = {
 	{ PB7, RELEASED, RELEASED, '8', 0x0000}
 };
 
-volatile unsigned char pinB;    // here we store RAW PINB data
+volatile unsigned char cachedPinB;
 volatile bool flagBtnUpdateValid = false;
 uint32_t debounceTime = 100;
 
@@ -201,7 +201,7 @@ bool findSequenceInCyclicBuffer(CyclicBuffer *buff, const char *seq) {
 
 ISR (TIMER0_COMPA_vect) {
 	msFromReset++;
-    pinB = PINB;
+    cachedPinB = PINB;
     flagBtnUpdateValid = true;
 }
 
@@ -209,7 +209,7 @@ void updateButtonState(void) {
     if (flagBtnUpdateValid == true) {
 		// low-pass-filter using debounce time
         for (unsigned char i = 0; i < 8; i++) {
-			uint8_t buttonTmp = ( pinB & (1 << buttons[i].pin) ) ? RELEASED : PRESSED;
+			uint8_t buttonTmp = ( cachedPinB & (1 << buttons[i].pin) ) ? RELEASED : PRESSED;
 			
 			if (buttonTmp != buttons[i].lastState) {
 				buttons[i].lastDebounceTime = msFromReset;
