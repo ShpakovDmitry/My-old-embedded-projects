@@ -201,7 +201,7 @@ ISR (TIMER0_COMPA_vect) {
 	msFromReset++;
 }
 
-bool oneBitIsSet (uint8_t x) {
+bool isOneBitSet (uint8_t x) {
 	return ( x && !(x & (x - 1)) ) ? true : false;
 }
 
@@ -234,7 +234,7 @@ void updateButtonState(void) {
 			if (cachedPinB != currButtonState) {
 				currButtonState = cachedPinB;
 				
-				if ( oneBitIsSet(~currButtonState) == true ) {
+				if ( isOneBitSet(~currButtonState) == true ) {
 					uint8_t i = getSetBitPosition( ~currButtonState );
 					addCharToCyclicBuffer(&cyclicBuffer, buttons[i].keyChar);
 				}
