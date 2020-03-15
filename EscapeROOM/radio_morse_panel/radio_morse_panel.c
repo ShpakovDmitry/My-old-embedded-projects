@@ -276,7 +276,7 @@ void initTimer0(void) {
 void initContoroller(void) {
 	initIO();
 	initTimer0();
-	SREG |= (1 << 7);
+	sei();
 }
 
 void main() {
