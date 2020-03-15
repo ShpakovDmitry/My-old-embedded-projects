@@ -132,7 +132,7 @@ void playMorsePhrase (const char* morsePhraseToPlay) {
 		return;
 }
 
-enum ButtonState { PRESSED, RELEASED, HOLD };
+enum ButtonState { PRESSED, RELEASED };
 
 typedef struct {
 	unsigned char pin : 3;
