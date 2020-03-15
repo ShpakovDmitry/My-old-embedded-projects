@@ -210,18 +210,12 @@ bool oneBitIsSet (uint8_t x) {
 
 uint8_t getSetBitPosition (uint8_t x) {
 	uint8_t pos = 0;
-	uint8_t LSB = 0x01;
 	
-	while (true) {
-		if (x & LSB) {
-			return pos;
-		}
-		else {
-			x = x >> 1;
-			pos++;
-		}
+	while ( x != 1 ) {
+		x >>= 1;
+		pos++;
 	}
-	
+	return pos;
 }
 
 void updateButtonState(void) {
