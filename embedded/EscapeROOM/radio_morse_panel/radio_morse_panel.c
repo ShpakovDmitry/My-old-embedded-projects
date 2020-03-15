@@ -206,6 +206,22 @@ bool oneBitIsSet (uint8_t x) {
 	return ( x && !(x & (x - 1)) ) ? true : false;
 }
 
+uint8_t getSetBitPosition (uint8_t x) {
+	uint8_t pos = 0;
+	uint8_t LSB = 0x01;
+	
+	while (true) {
+		if (x & LSB) {
+			return pos;
+		}
+		else {
+			x = x >> 1;
+			pos++;
+		}
+	}
+	
+}
+
 void updateButtonState(void) {
 	static uint32_t oldMs = 0;
 	
@@ -226,7 +242,7 @@ void updateButtonState(void) {
 				currButtonState = cachedPinB;
 				
 				if ( oneBitIsSet(~currButtonState) == true ) {
-					i = getSetBitPosition( ~currButtonState );
+					uint8_t i = getSetBitPosition( ~currButtonState );
 					addCharToCyclicBuffer(&cyclicBuffer, buttons[i].keyChar);
 				}
 			}
