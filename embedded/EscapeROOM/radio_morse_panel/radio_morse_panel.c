@@ -202,6 +202,10 @@ ISR (TIMER0_COMPA_vect) {
 	msFromReset++;
 }
 
+bool oneBitIsSet (uint8_t x) {
+	return ( x && !(x & (x - 1)) ) ? true : false;
+}
+
 void updateButtonState(void) {
 	static uint32_t oldMs = 0;
 	
