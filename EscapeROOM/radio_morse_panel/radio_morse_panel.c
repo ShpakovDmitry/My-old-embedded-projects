@@ -239,7 +239,9 @@ void updateButtonState(void) {
 			lastDebounceTime = msFromReset;
 		}
 		
-		if ( (msFromReset - lastDebounceTime) > debounceTime ) {
+		uint32_t deltaTime = getDeltaTime(msFromReset, lastDebounceTime);
+		
+		if ( deltaTime > debounceTime ) {
 			if (cachedPinB != currButtonState) {
 				currButtonState = cachedPinB;
 				
