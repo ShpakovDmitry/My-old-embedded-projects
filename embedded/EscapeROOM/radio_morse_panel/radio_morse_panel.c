@@ -4,6 +4,7 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include <stdint.h>
+#include <string.h>
 
 #define CARRIER_ON	(1 << PD5)
 #define CARRIER_OFF	(0 << PD5)
@@ -174,6 +175,7 @@ CyclicBuffer cyclicBuffer;
 void initCyclicBuffer(CyclicBuffer *buff) {
 	buff->pos = 0;
 	buff->size = PASS_LEN;
+	memset (buff->buff, 0, buff->size);
 }
 
 void addCharToCyclicBuffer(CyclicBuffer *buff, const char ch) {
