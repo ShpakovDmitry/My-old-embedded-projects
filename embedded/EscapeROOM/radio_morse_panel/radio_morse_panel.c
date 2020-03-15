@@ -17,8 +17,7 @@ static volatile uint32_t msFromReset;
 
 const char morsePhraseToPlay[] = "472";
 const char PASSWORD[] = "357";
-const uint8_t MAX_PASS_LEN = 5;
-#define PASS_LEN sizeof(PASSWORD) / sizeof(PASSWORD[0])
+#define MAX_PASS_LEN 5
 
 unsigned char carrier = CARRIER_OFF;
 
@@ -163,7 +162,7 @@ uint32_t debounceTime = 100;
 typedef struct {
 	unsigned char pos;
 	unsigned char size;
-	char buff[PASS_LEN];
+	char buff[MAX_PASS_LEN];
 }CyclicBuffer;
 
 // functions to handle cyclic buffer
@@ -175,7 +174,7 @@ CyclicBuffer cyclicBuffer;
 
 void initCyclicBuffer(CyclicBuffer *buff) {
 	buff->pos = 0;
-	buff->size = PASS_LEN;
+	buff->size = MAX_PASS_LEN;
 	memset (buff->buff, 0, buff->size);
 }
 
