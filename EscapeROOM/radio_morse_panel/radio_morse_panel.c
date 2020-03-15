@@ -206,13 +206,12 @@ void updateButtonState(void) {
 	static uint32_t oldMs = 0;
 	
 	if (oldMs != msFromReset) {
-		oldMs = msFromReset;
-		unsigned char cachedPinB = PINB;
 		static unsigned char currButtonState = ALL_RELEASED;
 		static unsigned char lastButtonState = ALL_RELEASED;
-		static uint32_t lastDebounceTime;
+		static uint32_t lastDebounceTime = 0;
 		
-		lastDebounceTime = msFromReset;
+		oldMs = msFromReset;
+		unsigned char cachedPinB = PINB;
 		
 		if (cachedPinB != lastButtonState) {
 			lastDebounceTime = msFromReset;
@@ -221,8 +220,9 @@ void updateButtonState(void) {
 		if ( (msFromReset - lastDebounceTime) > debounceTime ) {
 			if (cachedPinB != currButtonState) {
 				currButtonState = cachedPinB;
-				//TODO complete 
-				if(currButtonState == PRESSED) {
+				
+				if ( oneBitIsSet(~currButtonState) == true ) {
+					i = getSetBitPosition( ~currButtonState );
 					addCharToCyclicBuffer(&cyclicBuffer, buttons[i].keyChar);
 				}
 			}
