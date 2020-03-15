@@ -16,8 +16,9 @@
 static volatile uint32_t msFromReset;
 
 const char morsePhraseToPlay[] = "472";
-const char keysToPress[] = "357";
-#define PASS_LEN sizeof(keysToPress) / sizeof(keysToPress[0])
+const char PASSWORD[] = "357";
+const uint8_t MAX_PASS_LEN = 5;
+#define PASS_LEN sizeof(PASSWORD) / sizeof(PASSWORD[0])
 
 unsigned char carrier = CARRIER_OFF;
 
@@ -280,7 +281,7 @@ void main() {
 	
 	while(1) {
 		updateButtonState();
-		if (findSequenceInCyclicBuffer(&cyclicBuffer, keysToPress) == true) {
+		if (findSequenceInCyclicBuffer(&cyclicBuffer, PASSWORD) == true) {
 			initCyclicBuffer(&cyclicBuffer);
 			for (uint8_t i = 0; i < MAX_REPEAT; i++) {
 				playMorsePhrase(morsePhraseToPlay);
