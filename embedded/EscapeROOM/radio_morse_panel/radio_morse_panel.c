@@ -136,21 +136,18 @@ enum ButtonState { PRESSED, RELEASED, HOLD };
 
 typedef struct {
 	unsigned char pin : 3;
-	unsigned char currState : 2;
-	unsigned char lastState : 2;
 	char keyChar;
-	uint16_t lastDebounceTime;
 } Button;
 
 Button buttons[] = {
-	{ PB0, RELEASED, RELEASED, '1', 0x0000},
-	{ PB1, RELEASED, RELEASED, '2', 0x0000},
-	{ PB2, RELEASED, RELEASED, '3', 0x0000},
-	{ PB3, RELEASED, RELEASED, '4', 0x0000},
-	{ PB4, RELEASED, RELEASED, '5', 0x0000},
-	{ PB5, RELEASED, RELEASED, '6', 0x0000},
-	{ PB6, RELEASED, RELEASED, '7', 0x0000},
-	{ PB7, RELEASED, RELEASED, '8', 0x0000}
+	{ PB0, '1'},
+	{ PB1, '2'},
+	{ PB2, '3'},
+	{ PB3, '4'},
+	{ PB4, '5'},
+	{ PB5, '6'},
+	{ PB6, '7'},
+	{ PB7, '8'}
 };
 
 #define ALL_RELEASED (1 << PB0) | (1 << PB1) | (1 << PB2) | (1 << PB3) | (1 << PB4) \
