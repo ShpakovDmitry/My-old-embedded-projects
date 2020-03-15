@@ -287,6 +287,7 @@ void main() {
 	while(1) {
 		updateButtonState();
 		if (findSequenceInCyclicBuffer(&cyclicBuffer, keysToPress) == true) {
+			initCyclicBuffer(&cyclicBuffer);
 			for (uint8_t i = 0; i < MAX_REPEAT; i++) {
 				playMorsePhrase(morsePhraseToPlay);
 			}
