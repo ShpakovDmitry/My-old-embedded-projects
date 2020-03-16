@@ -159,8 +159,8 @@ Button buttons[] = {
 #define BTN_7_REL (RELEASED << PB6)
 #define BTN_8_REL (RELEASED << PB7)
 
-#define ALL_RELEASED	BTN_1_REL | BTN_2_REL | BTN_3_REL | BTN_4_REL | \
-						BTN_5_REL | BTN_6_REL | BTN_7_REL | BTN_8_REL
+#define ALL_RELEASED	( BTN_1_REL | BTN_2_REL | BTN_3_REL | BTN_4_REL | \
+						BTN_5_REL | BTN_6_REL | BTN_7_REL | BTN_8_REL )
 
 uint32_t debounceTime = 100;
 
