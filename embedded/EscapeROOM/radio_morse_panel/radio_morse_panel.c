@@ -176,7 +176,7 @@ void initCyclicBuffer(CyclicBuffer *buff);
 void addCharToCyclicBuffer(CyclicBuffer *buff, const char ch);
 bool findSequenceInCyclicBuffer(CyclicBuffer *buff, const char *seq);
 
-CyclicBuffer cyclicBuffer;
+CyclicBuffer pressedButtons;
 
 void initCyclicBuffer(CyclicBuffer *buff) {
 	buff->pos = 0;
@@ -260,7 +260,7 @@ void updateButtonState(void) {
 				
 				if ( isOneBitSet(~currButtonState) == true ) {
 					uint8_t i = getSetBitPosition( ~currButtonState );
-					addCharToCyclicBuffer(&cyclicBuffer, buttons[i].keyChar);
+					addCharToCyclicBuffer(&pressedButtons, buttons[i].keyChar);
 				}
 			}
 		}
@@ -297,12 +297,12 @@ void initContoroller(void) {
 void main() {
     initContoroller();
 	
-	initCyclicBuffer(&cyclicBuffer);
+	initCyclicBuffer(&pressedButtons);
 	
 	while(1) {
 		updateButtonState();
-		if (findSequenceInCyclicBuffer(&cyclicBuffer, PASSWORD) == true) {
-			initCyclicBuffer(&cyclicBuffer);
+		if (findSequenceInCyclicBuffer(&pressedButtons, PASSWORD) == true) {
+			initCyclicBuffer(&pressedButtons);
 			for (uint8_t i = 0; i < MAX_REPEAT; i++) {
 				playMorsePhrase(morsePhraseToPlay);
 			}
