@@ -162,7 +162,7 @@ Button buttons[] = {
 #define ALL_RELEASED	( BTN_1_REL | BTN_2_REL | BTN_3_REL | BTN_4_REL | \
 						BTN_5_REL | BTN_6_REL | BTN_7_REL | BTN_8_REL )
 
-uint32_t debounceTime = 100;
+#define DEBOUNCE_TIME 100
 
 // cyclic buffer implementation
 typedef struct {
@@ -254,7 +254,7 @@ void updateButtonState(void) {
 		
 		uint32_t deltaTime = getDeltaTime(msFromReset, lastDebounceTime);
 		
-		if ( deltaTime > debounceTime ) {
+		if ( deltaTime > DEBOUNCE_TIME ) {
 			if (cachedPinB != currButtonState) {
 				currButtonState = cachedPinB;
 				
