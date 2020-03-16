@@ -16,8 +16,8 @@
 static volatile uint32_t msFromReset;
 
 const char morsePhraseToPlay[] = "472";
-const char PASSWORD[] = "357";
 #define MAX_PASS_LEN 5
+const char PASSWORD[MAX_PASS_LEN] = "357\0";
 
 unsigned char carrier = CARRIER_OFF;
 
