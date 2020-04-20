@@ -4,7 +4,7 @@
 
 void initCyclicBuffer(CyclicBuffer *buff) {
 	buff->pos = 0;
-	buff->size = MAX_PASS_LEN;
+	buff->size = MAX_BUFF_LEN;
 	memset (buff->buff, 0, buff->size);
 }
 
