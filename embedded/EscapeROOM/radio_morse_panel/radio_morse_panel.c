@@ -5,6 +5,7 @@
 #include <avr/interrupt.h>
 #include <stdint.h>
 #include <string.h>
+#include "cyclic_buffer.h"
 
 #define CARRIER_ON	(1 << PD5)
 #define CARRIER_OFF	(0 << PD5)
@@ -18,6 +19,8 @@ static volatile uint32_t msFromReset;
 const char morsePhraseToPlay[] = "472";
 #define MAX_PASS_LEN 5
 const char PASSWORD[MAX_PASS_LEN] = "357\0";
+
+CyclicBuffer pressedButtons;
 
 unsigned char carrier = CARRIER_OFF;
 
@@ -163,47 +166,6 @@ Button buttons[] = {
 						BTN_5_REL | BTN_6_REL | BTN_7_REL | BTN_8_REL )
 
 #define DEBOUNCE_TIME 100
-
-// cyclic buffer implementation
-typedef struct {
-	unsigned char pos;
-	unsigned char size;
-	char buff[MAX_PASS_LEN];
-}CyclicBuffer;
-
-// functions to handle cyclic buffer
-void initCyclicBuffer(CyclicBuffer *buff);
-void addCharToCyclicBuffer(CyclicBuffer *buff, const char ch);
-bool findSequenceInCyclicBuffer(CyclicBuffer *buff, const char *seq);
-
-CyclicBuffer pressedButtons;
-
-void initCyclicBuffer(CyclicBuffer *buff) {
-	buff->pos = 0;
-	buff->size = MAX_PASS_LEN;
-	memset (buff->buff, 0, buff->size);
-}
-
-void addCharToCyclicBuffer(CyclicBuffer *buff, const char ch) {
-	buff->buff[buff->pos] = ch;
-	buff->pos++;
-	if (buff->pos >= buff->size) {
-		buff->pos = 0;
-	}
-}
-
-bool findSequenceInCyclicBuffer(CyclicBuffer *buff, const char *seq) {
-	unsigned char i;
-	bool flag = true;
-	
-	for(i = 0; i < buff->size && seq[i] != '\0'; ++i)
-	{
-		if( buff->buff[(buff->pos + i) % (buff->size)] != seq[i] )
-			flag = false;
-	}
-	
-	return flag;
-}
 
 
 ISR (TIMER0_COMPA_vect) {
