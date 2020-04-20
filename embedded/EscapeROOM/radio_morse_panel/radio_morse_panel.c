@@ -194,7 +194,7 @@ uint32_t getDeltaTime (uint32_t t1, uint32_t t0) {
 		return tmp + t1 + 1;
 	}
 	else {
-		return (uint32_t)0;
+		return 0;
 	}
 }
 
