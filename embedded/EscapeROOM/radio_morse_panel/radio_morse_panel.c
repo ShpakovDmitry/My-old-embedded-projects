@@ -17,8 +17,7 @@
 static volatile uint32_t msFromReset;
 
 const char morsePhraseToPlay[] = "472";
-#define MAX_PASS_LEN 5
-const char PASSWORD[MAX_PASS_LEN] = "357\0";
+const char PASSWORD[MAX_BUFF_LEN] = "357\0";
 
 CyclicBuffer pressedButtons;
 

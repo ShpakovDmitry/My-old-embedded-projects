@@ -3,11 +3,13 @@
 
 #include <stdbool.h>
 
+#define MAX_BUFF_LEN 10
+
 // cyclic buffer implementation
 typedef struct {
 	unsigned char pos;
 	unsigned char size;
-	char buff[MAX_PASS_LEN];
+	char buff[MAX_BUFF_LEN];
 }CyclicBuffer;
 
 // functions to handle cyclic buffer
