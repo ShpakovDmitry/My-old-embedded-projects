@@ -5,7 +5,7 @@
 #include <avr/interrupt.h>
 #include <stdint.h>
 #include <string.h>
-#include "cyclic_buffer.h"
+#include "../include/cyclic_buffer.h"
 
 #define CARRIER_ON	(1 << PD5)
 #define CARRIER_OFF	(0 << PD5)

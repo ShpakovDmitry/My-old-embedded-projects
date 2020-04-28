@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdbool.h>
-#include "cyclic_buffer.h"
+#include "../include/cyclic_buffer.h"
 
 void initCyclicBuffer(CyclicBuffer *buff) {
 	buff->pos = 0;
