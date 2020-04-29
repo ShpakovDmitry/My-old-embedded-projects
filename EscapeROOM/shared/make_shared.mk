@@ -1,5 +1,5 @@
 CC = avr-gcc
-CCFLAGS += -mmcu=$(MMCU) -DF_CPU=$(F_CPU) $(OPTIMISATION) -Wall 
+CCFLAGS += -mmcu=$(MMCU) -DF_CPU=$(F_CPU) $(OPTIMISATION) -Wall -Iinclude -I../include 
 BUILD_DIR = build
 SOURCE_DIR = source
 SOURCES = $(wildcard $(SOURCE_DIR)/*.c)
