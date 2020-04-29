@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdbool.h>
-#include "../include/cyclic_buffer.h"
+#include "cyclic_buffer.h"
 
 void initCyclicBuffer(CyclicBuffer *buff) {
 	buff->pos = 0;
@@ -28,5 +28,4 @@ bool findSequenceInCyclicBuffer(CyclicBuffer *buff, const char *seq) {
 	
 	return flag;
 }
-
 
