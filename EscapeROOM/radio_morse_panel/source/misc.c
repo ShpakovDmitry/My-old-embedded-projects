@@ -37,8 +37,12 @@ bool isOneBitSet (uint8_t x) {
 	return ( x && !(x & (x - 1)) ) ? true : false;
 }
 
-uint8_t getSetBitPosition (uint8_t x) {
+int8_t getSetBitPosition (uint8_t x) {
 	uint8_t pos = 0;
+
+	if (x == 0) {
+		return -1;
+	}
 	
 	while ( x != 1 ) {
 		x >>= 1;
