@@ -52,16 +52,7 @@ int8_t getSetBitPosition (uint8_t x) {
 }
 
 uint32_t getDeltaTime (uint32_t t1, uint32_t t0) {
-	if (t1 > t0) {
-		return t1 - t0;
-	}
-	else if (t1 < t0) {
-		uint32_t tmp = UINT32_MAX - t0;
-		return tmp + t1 + 1;
-	}
-	else {
-		return 0;
-	}
+	return t1 - t0;
 }
 
 void updateButtonState(void) {
