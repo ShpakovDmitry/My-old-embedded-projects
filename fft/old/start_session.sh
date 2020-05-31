@@ -1,1 +1,0 @@
-kate -s fft &
