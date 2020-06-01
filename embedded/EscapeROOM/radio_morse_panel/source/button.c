@@ -8,19 +8,19 @@ CyclicBuffer pressedButtons;
 void updateButtonState(void) {
 	static uint32_t oldMs = 0;
 	
-	if (oldMs != jiffies) {
+	if (oldMs != getJiffies()) {
 		static unsigned char currButtonState = ALL_RELEASED;
 		static unsigned char lastButtonState = ALL_RELEASED;
 		static uint32_t lastDebounceTime = 0;
 		
-		oldMs = jiffies;
+		oldMs = getJiffies();
 		unsigned char cachedPinB = PINB;
 		
 		if (cachedPinB != lastButtonState) {
-			lastDebounceTime = jiffies;
+			lastDebounceTime = getJiffies();
 		}
 		
-		uint32_t deltaTime = getDeltaTime(jiffies, lastDebounceTime);
+		uint32_t deltaTime = getDeltaTime(getJiffies(), lastDebounceTime);
 		
 		if ( deltaTime > DEBOUNCE_TIME ) {
 			if (cachedPinB != currButtonState) {
