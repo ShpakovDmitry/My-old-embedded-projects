@@ -13,6 +13,7 @@ $(BUILD_DIR):
 
 $(BUILD_DIR)/$(TARGET).hex: $(BUILD_DIR)/$(TARGET).o
 	avr-objcopy -O ihex $< $@
+	avr-size $(BUILD_DIR)/$(TARGET).o --format=avr --mcu=$(MMCU)
 
 $(BUILD_DIR)/$(TARGET).o: $(OBJECTS)
 	$(CC) $(CCFLAGS) $(LDFLAGS) $(OBJECTS) -o $@ 
