@@ -29,7 +29,7 @@ void initTimer0(void) {
 	// enable output compare A match interrupt
 	TIMSK |= (1 << OCIE0A);
 	// start counting ms at this point; actually when glob interrupt flag is set
-	msFromReset = 0;   
+	jiffies = 0;   
 }
 
 void initContoroller(void) {
