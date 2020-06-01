@@ -19,7 +19,7 @@
 extern const char gMorsePhraseToPlay[];
 extern const char PASSWORD[MAX_BUFF_LEN];
 extern CyclicBuffer pressedButtons;
-extern volatile uint32_t msFromReset;
+extern volatile uint32_t jiffies;
 
 #endif // GLOBALS_H
 
