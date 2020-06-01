@@ -8,7 +8,7 @@
 
 unsigned char carrier = CARRIER_OFF;
 
-const char morsePhraseToPlay[] = "472";
+const char gMorsePhraseToPlay[] = "472";
 const char PASSWORD[MAX_BUFF_LEN] = "357\0";
 
 void playUnit() {

@@ -16,7 +16,7 @@
 #define RED_LED PD3
 #define GREEN_LED PD4
 
-extern const char morsePhraseToPlay[];
+extern const char gMorsePhraseToPlay[];
 extern const char PASSWORD[MAX_BUFF_LEN];
 extern CyclicBuffer pressedButtons;
 extern volatile uint32_t msFromReset;
