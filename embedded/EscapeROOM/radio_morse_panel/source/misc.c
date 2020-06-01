@@ -1,3 +1,4 @@
+#include <util/atomic.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include "globals.h"
@@ -23,5 +24,14 @@ int8_t getSetBitPosition (uint8_t x) {
 
 uint32_t getDeltaTime (uint32_t t1, uint32_t t0) {
 	return t1 - t0;
+}
+
+uint32_t getJiffies() {
+	uint32_t tmp;
+
+	ATOMIC_BLOCK (ATOMIC_RESTORESTATE) {
+		tmp = jiffies;
+	}
+	return tmp;
 }
 
