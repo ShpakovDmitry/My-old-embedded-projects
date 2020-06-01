@@ -15,6 +15,8 @@
 #define ALL_RELEASED	( BTN_1_REL | BTN_2_REL | BTN_3_REL | BTN_4_REL | \
 						BTN_5_REL | BTN_6_REL | BTN_7_REL | BTN_8_REL )
 
+CyclicBuffer pressedButtons;
+
 enum ButtonState { PRESSED, RELEASED };
 
 typedef struct {
