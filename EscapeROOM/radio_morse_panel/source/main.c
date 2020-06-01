@@ -7,6 +7,9 @@
 #include "misc.h"
 #include "morse.h"
 
+const char gMorsePhraseToPlay[] = "472";
+const char PASSWORD[MAX_BUFF_LEN] = "357\0";
+
 void main() {
 	initContoroller();
 	initCyclicBuffer(&pressedButtons);
