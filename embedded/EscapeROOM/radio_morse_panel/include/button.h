@@ -1,6 +1,8 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
+#define DEBOUNCE_TIME 100
+
 #define BTN_1_REL (RELEASED << PB0)
 #define BTN_2_REL (RELEASED << PB1)
 #define BTN_3_REL (RELEASED << PB2)
