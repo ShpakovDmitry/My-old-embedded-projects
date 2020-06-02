@@ -1,6 +1,8 @@
 #ifndef MORSE_H
 #define MORSE_H
 
+#define DOT_DURATION 150
+
 void playUnit();
 void playDot();
 void playDash();

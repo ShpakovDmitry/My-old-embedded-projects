@@ -10,8 +10,6 @@
 #include <string.h>
 #include "cyclic_buffer.h"
 
-#define DEBOUNCE_TIME 100
-#define DOT_DURATION 150
 #define MAX_REPEAT 5
 #define RED_LED PD3
 #define GREEN_LED PD4
