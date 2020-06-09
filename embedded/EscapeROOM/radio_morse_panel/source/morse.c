@@ -8,7 +8,7 @@
 
 unsigned char carrier = CARRIER_OFF;
 
-void playUnit() {
+static void playUnit() {
 	unsigned char i;
 	
 	for ( i = 0; i < DOT_DURATION; i++ ) {
@@ -17,27 +17,27 @@ void playUnit() {
 	}
 }
 
-void playDot() {
+static void playDot() {
 	carrier = CARRIER_ON;
 	playUnit();
 	carrier = CARRIER_OFF;
 }
 
-void playDash() {
+static void playDash() {
 	carrier = CARRIER_ON;
 	playUnit(); playUnit(); playUnit();
 	carrier = CARRIER_OFF;
 }
 
-void playShortSpace() {
+static void playShortSpace() {
 	playUnit();
 }
 
-void playLetterSpace() {
+static void playLetterSpace() {
 	playUnit(); playUnit(); playUnit();
 }
 
-void playWordSpace() {
+static void playWordSpace() {
 	playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit();
 }
 
