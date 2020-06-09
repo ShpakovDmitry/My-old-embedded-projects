@@ -2,7 +2,6 @@
 #include <avr/interrupt.h>
 #include "globals.h"
 #include "init.h"
-#include "hw_config.h"
 
 void initIO(void) {
 	INIT_RED_LED();

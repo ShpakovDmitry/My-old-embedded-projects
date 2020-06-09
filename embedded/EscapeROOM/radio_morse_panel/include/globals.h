@@ -9,6 +9,7 @@
 #include <stdint.h>
 #include <string.h>
 #include "cyclic_buffer.h"
+#include "hw_config.h"
 
 #define MAX_REPEAT 5
 

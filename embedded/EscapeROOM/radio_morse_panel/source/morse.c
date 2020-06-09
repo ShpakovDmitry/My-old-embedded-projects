@@ -1,7 +1,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include "globals.h"
-#include "hw_config.h"
 #include "morse.h"
 
 #define CARRIER_ON	(1 << PD5)
