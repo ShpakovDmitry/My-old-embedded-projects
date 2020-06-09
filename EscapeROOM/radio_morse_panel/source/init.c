@@ -2,10 +2,12 @@
 #include <avr/interrupt.h>
 #include "globals.h"
 #include "init.h"
+#include "hw_config.h"
 
 void initIO(void) {
-	PORTD &= ~( (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED) );
-	DDRD |= (1 << PD5) | (1 << RED_LED) | (1 << GREEN_LED);
+	INIT_RED_LED();
+	INIT_GREEN_LED();
+	INIT_BUZZER();
 	PORTB = 0xff;
 	DDRB = 0x00;
 }
