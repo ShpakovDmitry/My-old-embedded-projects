@@ -11,8 +11,6 @@
 #include "cyclic_buffer.h"
 
 #define MAX_REPEAT 5
-#define RED_LED PD3
-#define GREEN_LED PD4
 
 extern const char gMorsePhraseToPlay[];
 extern const char PASSWORD[MAX_BUFF_LEN];
