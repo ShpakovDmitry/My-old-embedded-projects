@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdint.h>
+#include "button.h"
 #include "cyclic_buffer.h"
 #include "globals.h"
 #include "init.h"

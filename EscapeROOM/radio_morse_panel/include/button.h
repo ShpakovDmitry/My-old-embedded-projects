@@ -17,20 +17,6 @@
 
 enum ButtonState { PRESSED, RELEASED };
 
-typedef struct {
-	unsigned char pin : 3;
-	char keyChar;
-} Button;
-
-const Button buttons[] = {
-	{ PB0, '1'},
-	{ PB1, '2'},
-	{ PB2, '3'},
-	{ PB3, '4'},
-	{ PB4, '5'},
-	{ PB5, '6'},
-	{ PB6, '7'},
-	{ PB7, '8'}
-};
+void updateButtonState(void);
 
 #endif // BUTTON_H
