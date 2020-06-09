@@ -22,7 +22,7 @@ typedef struct {
 	char keyChar;
 } Button;
 
-static Button buttons[] = {
+const Button buttons[] = {
 	{ PB0, '1'},
 	{ PB1, '2'},
 	{ PB2, '3'},
