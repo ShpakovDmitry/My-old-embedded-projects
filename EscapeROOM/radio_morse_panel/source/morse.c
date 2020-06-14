@@ -1,21 +1,40 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "globals.h"
 #include "morse.h"
+#include "misc.h"
+#include "hw_config.h"
 
-#define CARRIER_ON	(1 << PD5)
-#define CARRIER_OFF	(0 << PD5)
+#define UNIT_LENGTH DOT_DURATION_JIFFIES
 
-unsigned char carrier = CARRIER_OFF;
+#define  DOT_LENGTH (1 * UNIT_LENGTH)
+#define DASH_LENGTH (3 * UNIT_LENGTH)
+#define  SHORT_SPACE_LENGTH (1 * UNIT_LENGTH)
+#define LETTER_SPACE_LENGTH (3 * UNIT_LENGTH)
+#define   WORD_SPACE_LENGTH (7 * UNIT_LENGTH)
 
-static void playUnit() {
-	unsigned char i;
-	
-	for ( i = 0; i < DOT_DURATION; i++ ) {
-		PORTD ^= ( (1 << PD5) & carrier );
-		_delay_ms(1);
+typedef enum {CARRIER_OFF, CARRIER_ON} Carrier;
+
+static void playUnit(Carrier carrier, uint32_t duration) {
+	uint32_t lastJiffies;
+
+	lastJiffies = getJiffies();
+	if (carrier == CARRIER_OFF) {
+		TURN_BUZZER_OFF();
+		while (getJiffies() - lastJiffies < duration) {
+			;
+		}
+	} else {
+		uint32_t 
+		TURN_BUZZER_OFF();
+		while (getJiffies() - lastJiffies < duration) {
+			
+		}
 	}
+
+	return;
 }
 
 static void playDot() {
