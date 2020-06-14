@@ -1,5 +1,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdlib.h>
 #include "globals.h"
 #include "morse.h"
 

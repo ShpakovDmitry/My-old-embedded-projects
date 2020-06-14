@@ -1,5 +1,5 @@
-#include "globals.h"
 #include "interrupts.h"
+#include <avr/interrupt.h>
 
 volatile uint32_t jiffies;
 
