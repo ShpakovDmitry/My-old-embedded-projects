@@ -1,6 +1,7 @@
 #ifndef HW_CONFIG_H
 #define HW_CONFIG_H
 
+#include <avr/io.h>
 #include "gpio.h"
 
 #define RED_LED_DIR DDRD

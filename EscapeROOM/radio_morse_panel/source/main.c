@@ -5,6 +5,7 @@
 #include "globals.h"
 #include "init.h"
 #include "morse.h"
+#include "hw_config.h"
 
 #define MAX_REPEAT 5
 
@@ -18,10 +19,15 @@ void main() {
 	while (1) {
 		updateButtonState();
 		if (findSequenceInCyclicBuffer(&pressedButtons, PASSWORD) == true) {
+			TURN_RED_LED_OFF();
+			TURN_GREEN_LED_ON();
 			initCyclicBuffer(&pressedButtons);
 			for (uint8_t i = 0; i < MAX_REPEAT; i++) {
 				playMorsePhrase(gMorsePhraseToPlay);
 			}
+		} else {
+			TURN_GREEN_LED_OFF();
+			TURN_RED_LED_ON();
 		}
 	
 	}
