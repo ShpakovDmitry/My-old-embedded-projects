@@ -4,9 +4,9 @@
 #include "cyclic_buffer.h"
 #include "globals.h"
 #include "init.h"
-#include "interrupts.h"
-#include "misc.h"
 #include "morse.h"
+
+#define MAX_REPEAT 5
 
 const char gMorsePhraseToPlay[] = "472";
 const char PASSWORD[MAX_BUFF_LEN] = "357\0";

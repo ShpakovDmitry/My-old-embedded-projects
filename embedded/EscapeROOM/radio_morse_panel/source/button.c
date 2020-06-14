@@ -1,6 +1,6 @@
 #include <stdint.h>
+#include <avr/io.h>
 #include "cyclic_buffer.h"
-#include "globals.h"
 #include "button.h"
 #include "misc.h"
 
