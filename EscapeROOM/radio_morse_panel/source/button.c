@@ -3,6 +3,7 @@
 #include "cyclic_buffer.h"
 #include "button.h"
 #include "misc.h"
+#include "hw_config.h"
 
 CyclicBuffer pressedButtons;
 
@@ -44,7 +45,16 @@ void updateButtonState(void) {
 		static uint32_t lastDebounceTime = 0;
 		
 		oldMs = getJiffies();
-		unsigned char cachedPinB = PINB;
+		unsigned char cachedPinB = 0;
+
+		cachedPinB |= ( BUTTON1_PRESSED() << BUTTON1_PIN);
+		cachedPinB |= ( BUTTON2_PRESSED() << BUTTON2_PIN);
+		cachedPinB |= ( BUTTON3_PRESSED() << BUTTON3_PIN);
+		cachedPinB |= ( BUTTON4_PRESSED() << BUTTON4_PIN);
+		cachedPinB |= ( BUTTON5_PRESSED() << BUTTON5_PIN);
+		cachedPinB |= ( BUTTON6_PRESSED() << BUTTON6_PIN);
+		cachedPinB |= ( BUTTON7_PRESSED() << BUTTON7_PIN);
+		cachedPinB |= ( BUTTON8_PRESSED() << BUTTON8_PIN);
 		
 		if (cachedPinB != lastButtonState) {
 			lastDebounceTime = getJiffies();
