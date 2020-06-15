@@ -9,56 +9,60 @@
 
 #define UNIT_LENGTH DOT_DURATION_JIFFIES
 
-#define  DOT_LENGTH (1 * UNIT_LENGTH)
-#define DASH_LENGTH (3 * UNIT_LENGTH)
+#define  DOT_LENGTH         (1 * UNIT_LENGTH)
+#define DASH_LENGTH         (3 * UNIT_LENGTH)
 #define  SHORT_SPACE_LENGTH (1 * UNIT_LENGTH)
 #define LETTER_SPACE_LENGTH (3 * UNIT_LENGTH)
 #define   WORD_SPACE_LENGTH (7 * UNIT_LENGTH)
 
 typedef enum {CARRIER_OFF, CARRIER_ON} Carrier;
 
-static void playUnit(Carrier carrier, uint32_t duration) {
+static void playTone(Carrier carrier, uint32_t duration) {
 	uint32_t lastJiffies;
 
+	TURN_BUZZER_OFF();
 	lastJiffies = getJiffies();
 	if (carrier == CARRIER_OFF) {
-		TURN_BUZZER_OFF();
 		while (getJiffies() - lastJiffies < duration) {
 			;
 		}
 	} else {
-		uint32_t 
-		TURN_BUZZER_OFF();
+		uint32_t lastCarrierJiffies;
+		uint32_t i = 0;
 		while (getJiffies() - lastJiffies < duration) {
-			
+			lastCarrierJiffies = getJiffies();
+			while (getJiffies() - lastCarrierJiffies < CARRIER_CYCLE_DURATION_JIFFIES) {
+				;
+			}
+			if ( i++ % 2 ) {
+				TURN_BUZZER_OFF();
+			}
+			else {
+				TURN_BUZZER_ON();
+			}
 		}
 	}
-
-	return;
+	TURN_BUZZER_OFF();
 }
 
 static void playDot() {
-	carrier = CARRIER_ON;
-	playUnit();
-	carrier = CARRIER_OFF;
+	playTone(CARRIER_ON, DOT_LENGTH);
 }
 
 static void playDash() {
-	carrier = CARRIER_ON;
-	playUnit(); playUnit(); playUnit();
-	carrier = CARRIER_OFF;
+	playTone(CARRIER_ON, DASH_LENGTH);
 }
 
 static void playShortSpace() {
-	playUnit();
+	playTone(CARRIER_OFF, SHORT_SPACE_LENGTH);
 }
 
 static void playLetterSpace() {
-	playUnit(); playUnit(); playUnit();
+	playTone(CARRIER_OFF, LETTER_SPACE_LENGTH);
 }
 
 static void playWordSpace() {
-	playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit(); playUnit();
+	playTone(CARRIER_OFF, WORD_SPACE_LENGTH);
 }
 
 char* findMorseChar (char letter) {
@@ -129,13 +133,12 @@ void playMorseLetter (char letter) {
 }
 
 void playMorsePhrase (const char* morsePhraseToPlay) {
-		for (unsigned char i = 0; morsePhraseToPlay[i] != '\0'; i++) {
-			playMorseLetter(morsePhraseToPlay[i]);
-			playLetterSpace();
-		}
-		
-		playWordSpace();
-		
-		return;
+	for (unsigned char i = 0; morsePhraseToPlay[i] != '\0'; i++) {
+		playMorseLetter(morsePhraseToPlay[i]);
+		playLetterSpace();
+	}
+	
+	playWordSpace();
+	
+	return;
 }
-
